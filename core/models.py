@@ -50,7 +50,7 @@ class Base(models.Model):
 		abstract = True
     
     
-class Addres(Base):
+class Address(Base):
 	"""
 	  Address model
 	"""
