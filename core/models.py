@@ -1,56 +1,44 @@
 from django.db import models
 
-from django.contrib.auth.models import(
-    AbstractUser, 
-    BaseUserManager
-)
+from users.models import CustomUser
 
-
-class CustomUserManager(BaseUserManager):
-	use_in_migrations = True
-
-	def _create_user(self, register_number, password, **extra_fields):
-		if not register_number:
-			raise ValueError('Your register number is required')
-		user = self.model(register_number=register_number, username=register_number, **extra_fields)
-		user.set_password(password)
-		user.save(using=self._db)
-		return user
-	
-	def create_user(self, register_number, password=None, **extra_fields):
-		extra_fields.setdefault('is_superuser', False)
-		return self._create_user(register_number, password, **extra_fields)
-    
-	def create_superuser(self, register_number, password, **extra_fields):
-		extra_fields.setdefault('is_superuser', True)
-		extra_fields.setdefault('is_staff', True)
-		
-		if extra_fields.get('is_superuser') is not True:
-			raise ValueError('Superuser needs the is_superuser=True')
-		
-		if extra_fields.get('is_staff') is not True:
-			raise ValueError('Superuser needs the is_staff=True') 
-		return self._create_user(register_number, password, **extra_fields)
-	
-
-class CustomUser(AbstractUser):
+class NaturalPerson(CustomUser):
 	"""
-		Custumized User model
-	"""
-	register_number = models.IntegerField(unique=True, primary_key=True)
-	picture = models.CharField(max_length=255)
-	is_staff = models.BooleanField(default=True)
+        Natural Person model
+    """
+	name = models.CharField(max_length=50)
+	birth_date = models.DateField()
+	cpf = models.CharField(max_length=11)
+	rg = models.CharField(max_length=8)
+	social_name = models.CharField(max_length=50)
 
-	USERNAME_FIELD = 'register_number'
-	REQUIRED_FIELDS = ['picture']
-	
+	class Meta:
+		verbose_name = 'natural person'
+		verbose_name_plural = 'natural persons'
 
 	def __str__(self) -> str:
-		return str(self.register_number)
-	
-	objects = CustomUserManager()
+		return f'{self.cpf}'
 	
 
+class LegalPerson(CustomUser):
+	"""
+        Legal Person model
+    """
+	fantasy_name = models.CharField(max_length=100)
+	establishment_date = models.DateField
+	cnpj = models.CharField(max_length=14)
+	municipal_registration = models.CharField(max_length=11)
+	state_registration = models.CharField(max_length=9)
+	legal_nature = models.CharField(max_length=100)
+
+	class Meta:
+		verbose_name = 'legal person'
+		verbose_name_plural = 'legal persons'
+
+	def __str__(self) -> str:
+		return f'{self.cnpj}'
+	
+# BANK MODELS
 class Base(models.Model):
 	"""
 	Base abstract class for all models
@@ -66,7 +54,7 @@ class Addres(Base):
 	"""
 	  Address model
 	"""
-	# USER FK FIELD
+	# user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 	cep = models.CharField(max_length=12)
 	city = models.CharField(max_length=50)
 	street = models.CharField(max_length=50)
@@ -85,7 +73,7 @@ class Email(Base):
     """
       Email model
     """
-    # USER FK FIELD
+    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     email = models.CharField(max_length=100)
     
     class Meta:
@@ -100,7 +88,7 @@ class Phone(Base):
     """
     Phone model
     """
-    # USER FK FIELD
+    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=10)
     prefix_number = models.CharField(max_length=3)
     area_code = models.CharField(max_length=3)
