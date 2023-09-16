@@ -39,8 +39,11 @@ class CustomUser(AbstractUser):
 	"""
 	register_number = models.IntegerField(unique=True, primary_key=True)
 	picture = models.CharField(max_length=255)
-	REQUIRED_FIELDS = []
+	is_staff = models.BooleanField(default=True)
+
 	USERNAME_FIELD = 'register_number'
+	REQUIRED_FIELDS = ['picture']
+	
 
 	def __str__(self) -> str:
 		return str(self.register_number)
