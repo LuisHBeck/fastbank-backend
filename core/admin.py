@@ -6,6 +6,12 @@ from .models import (
 	Address,
 	Email,
 	Phone,
+	Account,
+	Investment,
+	Loan,
+	Installment,
+	Card,
+	Transaction,
 )
 
 @admin.register(NaturalPerson)
@@ -29,3 +35,116 @@ class NaturalPersonAdmin(admin.ModelAdmin):
 		'state_registration',
 		'legal_nature'
 	]
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+	list_display = [
+		'user',
+		'cep',
+		'city',
+		'street',
+		'neighborhood',
+		'state'
+	]
+	ordering = ['id']
+
+
+@admin.register(Email)
+class EmailAdmin(admin.ModelAdmin):
+	list_display = [
+        'user',
+        'email'
+    ]
+	ordering = ['id']
+
+
+@admin.register(Phone)
+class PhoneAdmin(admin.ModelAdmin):
+	list_display = [
+        'user',
+        'area_code',
+		'prefix_number',
+		'phone_number',
+    ]
+	ordering = ['id']
+
+
+@admin.register(Account)
+class AccountAdmin(admin.ModelAdmin):
+	list_display = [
+        # 'user',
+		'agency',
+		'number',
+        'type',
+        'credit_limit',
+        'is_active',
+	]
+	ordering = ['id']
+
+
+@admin.register(Investment)
+class InvestmentAdmin(admin.ModelAdmin):
+	list_display = [
+        'id_account',
+        'type',
+        'contribution',
+        'admin_fee',
+		'period',
+		'risc_rate',
+		'profitability',
+		'is_active',
+	]
+	ordering = ['id']
+
+
+@admin.register(Loan)
+class LoanAdmin(admin.ModelAdmin):
+	list_display = [
+		'id_account',
+		'request_date',
+		'amount_request',
+		'interest_rate',
+		'is_approved',
+		'approval_date',
+		'installment_amount',
+		'observation'
+	]
+	ordering = ['id']
+
+
+@admin.register(Installment)
+class InstallmentAdmin(admin.ModelAdmin):
+	list_display = [
+        'id_loan',
+		'number',
+		'expiration_date',
+		'payment_date',
+		'payment_amount',
+	]
+	ordering = ['id']
+
+
+@admin.register(Card)
+class CardAdmin(admin.ModelAdmin):
+	list_display = [
+        'id_account',
+        'number',
+        'expiration_date',
+		'flag',
+		'verification_code',
+        'is_active',
+	]
+	ordering = ['id']
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
+	list_display = [
+        'id_card',
+        'type',
+        'timestamp',
+        'operation',
+		'amount',
+	]
+	ordering = ['id']
