@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 from users.models import CustomUser
 
@@ -54,7 +55,7 @@ class Address(Base):
 	"""
 	  Address model
 	"""
-	# user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+	user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 	cep = models.CharField(max_length=12)
 	city = models.CharField(max_length=50)
 	street = models.CharField(max_length=50)
@@ -73,7 +74,7 @@ class Email(Base):
     """
       Email model
     """
-    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_email')
     email = models.CharField(max_length=100)
     
     class Meta:
@@ -88,7 +89,7 @@ class Phone(Base):
     """
     Phone model
     """
-    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=10)
     prefix_number = models.CharField(max_length=3)
     area_code = models.CharField(max_length=3)
@@ -109,11 +110,11 @@ class Account(Base):
 		['Current', 'Current'],
 		['Savings', 'Savings'],
 	]
-	user = models.ManyToManyField(CustomUser, through='UserAccount')
-	agency = models.models.CharField(max_length=15)
+	user = models.ManyToManyField(get_user_model())
+	agency = models.CharField(max_length=15)
 	number = models.CharField(max_length=15)
 	type = models.CharField(max_length=8, choices=ACCOUNT_TYPE_CHOICES)
-	credit_limit = models.DecimalField(decimal_places=2)
+	credit_limit = models.DecimalField(decimal_places=2, max_digits=7)
 	is_active = models.BooleanField(default=True)
 
 
@@ -129,13 +130,13 @@ class Investment(Base):
 	"""
       Investment model
     """
-	account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
 	type = models.CharField(max_length=50)
-	contribution = models.DecimalField(decimal_places=2)
-	admin_fee = models.DecimalField(decimal_places=2)
+	contribution = models.DecimalField(decimal_places=2, max_digits=7)
+	admin_fee = models.DecimalField(decimal_places=2, max_digits=7)
 	period = models.DateField()
-	risc_rate = models.DecimalField(decimal_places=2)
-	profitability = models.DecimalField(decimal_places=2)
+	risc_rate = models.DecimalField(decimal_places=2, max_digits=7)
+	profitability = models.DecimalField(decimal_places=2, max_digits=7)
 	is_active = models.BooleanField(default=True)
 
 	class Meta:
@@ -150,10 +151,10 @@ class Loan(Base):
 	"""
       Loan model
     """
-	account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
 	request_date = models.DateField()
-	amount_request = models.DecimalField(decimal_places=2)
-	interest_rate = models.DecimalField(decimal_places=2)
+	amount_request = models.DecimalField(decimal_places=2, max_digits=7)
+	interest_rate = models.DecimalField(decimal_places=2, max_digits=7)
 	is_approved = models.BooleanField(default=True)
 	approval_date = models.DateField(blank=True, null=True)
 	installment_amount = models.IntegerField()
@@ -167,4 +168,56 @@ class Loan(Base):
 		return f'{self.amount_request}'
 	
 
-        
+class Installment(Base):
+	"""
+      Installment model
+    """
+	id_loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+	number = models.CharField(max_length=50)
+	expiration_date = models.DateField()
+	payment_date = models.DateField(blank=True, null=True)
+	payment_amount = models.DecimalField(decimal_places=2, max_digits=7)
+
+	class Meta:
+		verbose_name = 'installment'
+		verbose_name_plural = 'installments'
+
+	def __str__(self):
+		return f'{self.number}'
+	
+
+class Card(Base):
+	"""
+      Card model
+    """
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	number = models.CharField(max_length=50)
+	expiration_date = models.DateField()
+	flag = models.CharField(max_length=25)
+	verification_code = models.CharField(max_length=25)
+	is_active = models.BooleanField(default=True)
+
+	class Meta:
+		verbose_name = 'card'
+		verbose_name_plural = 'cards'
+
+	def __str__(self):
+		return f'{self.number}'
+	
+
+class Transaction(Base):
+	"""
+      Transaction model
+    """
+	id_card = models.ForeignKey(Card, on_delete=models.CASCADE)
+	type = models.CharField(max_length=25)
+	timestamp = models.DateField()
+	operation = models.CharField(max_length=25)
+	amount = models.DecimalField(decimal_places=2, max_digits=7)
+
+	class Meta:
+		verbose_name = 'transaction'
+		verbose_name_plural = 'transactions'
+
+	def __str__(self):
+		return f'{self.type}' 
