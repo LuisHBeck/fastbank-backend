@@ -99,4 +99,72 @@ class Phone(Base):
         
     def __str__(self):
         return f'{self.prefix_number} {self.area_code} {self.phone_number}'
+		
+
+class Account(Base):
+	"""
+      Account model
+    """
+	ACCOUNT_TYPE_CHOICES = [
+		['Current', 'Current'],
+		['Savings', 'Savings'],
+	]
+	user = models.ManyToManyField(CustomUser, through='UserAccount')
+	agency = models.models.CharField(max_length=15)
+	number = models.CharField(max_length=15)
+	type = models.CharField(max_length=8, choices=ACCOUNT_TYPE_CHOICES)
+	credit_limit = models.DecimalField(decimal_places=2)
+	is_active = models.BooleanField(default=True)
+
+
+	class Meta:
+		verbose_name = 'account'
+		verbose_name_plural = 'accounts'
+
+	def __str__(self):
+		return f'{self.agency} {self.number}'
+	
+
+class Investment(Base):
+	"""
+      Investment model
+    """
+	account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	type = models.CharField(max_length=50)
+	contribution = models.DecimalField(decimal_places=2)
+	admin_fee = models.DecimalField(decimal_places=2)
+	period = models.DateField()
+	risc_rate = models.DecimalField(decimal_places=2)
+	profitability = models.DecimalField(decimal_places=2)
+	is_active = models.BooleanField(default=True)
+
+	class Meta:
+		verbose_name = 'investment'
+		verbose_name_plural = 'investments'
+
+	def __str__(self):
+		return f'{self.type}'
+	
+
+class Loan(Base):
+	"""
+      Loan model
+    """
+	account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	request_date = models.DateField()
+	amount_request = models.DecimalField(decimal_places=2)
+	interest_rate = models.DecimalField(decimal_places=2)
+	is_approved = models.BooleanField(default=True)
+	approval_date = models.DateField(blank=True, null=True)
+	installment_amount = models.IntegerField()
+	observation = models.TextField()
+
+	class Meta:
+		verbose_name = 'loan'
+		verbose_name_plural = 'loans'
+
+	def __str__(self):
+		return f'{self.amount_request}'
+	
+
         
