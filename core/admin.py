@@ -33,7 +33,7 @@ class NaturalPersonAdmin(admin.ModelAdmin):
 		'cnpj',
 		'municipal_registration',
 		'state_registration',
-		'legal_nature'
+		'legal_nature',
 	]
 
 
@@ -41,11 +41,12 @@ class NaturalPersonAdmin(admin.ModelAdmin):
 class AddressAdmin(admin.ModelAdmin):
 	list_display = [
 		'user',
-		'cep',
-		'city',
 		'street',
+  		'number',
 		'neighborhood',
-		'state'
+		'city',
+		'state',
+		'cep',
 	]
 	ordering = ['id']
 
@@ -54,7 +55,7 @@ class AddressAdmin(admin.ModelAdmin):
 class EmailAdmin(admin.ModelAdmin):
 	list_display = [
         'user',
-        'email'
+        'email',
     ]
 	ordering = ['id']
 
@@ -77,6 +78,7 @@ class AccountAdmin(admin.ModelAdmin):
 		'agency',
 		'number',
         'type',
+        'balance',
         'credit_limit',
         'is_active',
 	]
@@ -108,7 +110,7 @@ class LoanAdmin(admin.ModelAdmin):
 		'is_approved',
 		'approval_date',
 		'installment_amount',
-		'observation'
+		'observation',
 	]
 	ordering = ['id']
 

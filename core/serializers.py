@@ -88,6 +88,7 @@ class AccountSerializer(serializers.ModelSerializer):
             'agency',
             'number',
             'type',
+            'balance'
             'credit_Limit',
             'is_active'
         ]

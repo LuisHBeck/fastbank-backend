@@ -116,6 +116,7 @@ class Account(Base):
 	agency = models.CharField(max_length=15)
 	number = models.CharField(max_length=15)
 	type = models.CharField(max_length=8, choices=ACCOUNT_TYPE_CHOICES)
+	balance = models.DecimalField(decimal_places=2, max_digits=7)
 	credit_limit = models.DecimalField(decimal_places=2, max_digits=7)
 	is_active = models.BooleanField(default=True)
 
