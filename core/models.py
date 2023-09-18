@@ -56,11 +56,13 @@ class Address(Base):
 	  Address model
 	"""
 	user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-	cep = models.CharField(max_length=12)
-	city = models.CharField(max_length=50)
 	street = models.CharField(max_length=50)
+	number = models.CharField(max_length=5)
 	neighborhood = models.CharField(max_length=50)
+	city = models.CharField(max_length=50)
 	state = models.CharField(max_length=50)
+	cep = models.CharField(max_length=12)
+	
   
 	class Meta:
 		verbose_name = 'address'
@@ -90,9 +92,9 @@ class Phone(Base):
     Phone model
     """
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    phone_number = models.CharField(max_length=10)
-    prefix_number = models.CharField(max_length=3)
     area_code = models.CharField(max_length=3)
+    prefix_number = models.CharField(max_length=3)
+    phone_number = models.CharField(max_length=10)
 
     class Meta:
         verbose_name = 'phone'
