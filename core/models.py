@@ -3,10 +3,11 @@ from django.contrib.auth import get_user_model
 
 from users.models import CustomUser
 
-class NaturalPerson(CustomUser):
+class NaturalPerson(models.Model):
 	"""
         Natural Person model
     """
+	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="natural_person")
 	name = models.CharField(max_length=50)
 	birth_date = models.DateField()
 	cpf = models.CharField(max_length=11)
@@ -25,6 +26,7 @@ class LegalPerson(CustomUser):
 	"""
         Legal Person model
     """
+	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="legal_person")
 	fantasy_name = models.CharField(max_length=100)
 	establishment_date = models.DateField
 	cnpj = models.CharField(max_length=14)

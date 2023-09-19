@@ -20,6 +20,7 @@ class NaturalPersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = NaturalPerson
         fields = [
+            'user',
 			'name',
 			'birth_date',
 			'cpf',
@@ -33,6 +34,7 @@ class LegalPersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = LegalPerson
         fields = [
+            'user',
 			'fantasy_name',
 			'establishment_date',
 			'cnpj',

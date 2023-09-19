@@ -17,6 +17,7 @@ from .models import (
 @admin.register(NaturalPerson)
 class NaturalPersonAdmin(admin.ModelAdmin):
 	list_display = [
+   	'user',
 		'name',
 		'birth_date',
 		'cpf',
@@ -28,6 +29,7 @@ class NaturalPersonAdmin(admin.ModelAdmin):
 @admin.register(LegalPerson)
 class NaturalPersonAdmin(admin.ModelAdmin):
 	list_display = [
+   	'user',
 		'fantasy_name',
 		'establishment_date',
 		'cnpj',
