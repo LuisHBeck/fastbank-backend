@@ -27,9 +27,9 @@ class NaturalPersonAdmin(admin.ModelAdmin):
 
 
 @admin.register(LegalPerson)
-class NaturalPersonAdmin(admin.ModelAdmin):
+class LegalPersonAdmin(admin.ModelAdmin):
 	list_display = [
-   	'user',
+   		'user',
 		'fantasy_name',
 		'establishment_date',
 		'cnpj',

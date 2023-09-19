@@ -22,13 +22,13 @@ class NaturalPerson(models.Model):
 		return f'{self.cpf}'
 	
 
-class LegalPerson(CustomUser):
+class LegalPerson(models.Model):
 	"""
         Legal Person model
     """
 	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="legal_person")
 	fantasy_name = models.CharField(max_length=100)
-	establishment_date = models.DateField
+	establishment_date = models.DateField()
 	cnpj = models.CharField(max_length=14)
 	municipal_registration = models.CharField(max_length=11)
 	state_registration = models.CharField(max_length=9)

@@ -1,0 +1,18 @@
+{
+	"user": 123456,
+	"name": "Luís Beck",
+	"birth_date": "2004-06-19",
+	"cpf": "47238341840",
+	"rg": "38900922",
+	"social_name": "Beck"
+}
+
+{
+  	"user": 123456,
+	"fantasy_name": "Fantasy",
+	"establishment_date": "2004-06-19",
+	"cnpj": "38900922",
+	"municipal_registration": "38900922",
+	"state_registration": "38900922",
+	"legal_nature": "Fantasy"
+}
