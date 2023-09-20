@@ -8,11 +8,33 @@
 }
 
 {
-  "user": 123456,
+  	"user": 123456,
 	"fantasy_name": "Fantasy",
 	"establishment_date": "2004-06-19",
 	"cnpj": "38900922",
 	"municipal_registration": "38900922",
 	"state_registration": "38900922",
 	"legal_nature": "Fantasy"
+}
+
+{
+	"user": 123456,
+	"street": "Rua Jones",
+	"number": "69",
+	"neighborhood": "LeWhite Green",
+	"city": "Varsóvia",
+	"state": "Polônia",
+	"cep": "12564789",
+}
+
+{
+	"user": 123456,
+    "email": "test@gmail.com"
+}
+
+{
+	"user": 123456,
+	"area_code": "+55",
+	"prefix_number": "19",
+	"phone_number": "992097439"
 }

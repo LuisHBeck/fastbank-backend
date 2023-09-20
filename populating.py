@@ -6,6 +6,9 @@ user_create_url = os.path.join(BASE_URL, 'auth/users/')
 jwt_create_url = os.path.join(BASE_URL, 'auth/jwt/create/')
 natural_person_url = os.path.join(BASE_URL, 'natural-person/')
 legal_person_url = os.path.join(BASE_URL, 'legal-person/')
+address_url = os.path.join(BASE_URL, 'addresses/')
+email_url = os.path.join(BASE_URL, 'emails/')
+phone_url = os.path.join(BASE_URL, 'phones/')
 
 
 def user_create(register_number, password, picture='a'):
@@ -56,10 +59,41 @@ def create_legal_person(headers, register_number, fantasy_name, establishment_da
 	return response.json()
 
 
+def create_address(headers, user, street, number, neighborhood, city, state, cep):
+	response = requests.post(address_url, headers=headers, json={
+		'user': user,
+        'street': street,
+        'number': number,
+        'neighborhood': neighborhood,
+        'city': city,
+        'state': state,
+        'cep': cep
+	})
+	return response.json()
+
+
+def create_email(headers, user, email):
+    response = requests.post(email_url, headers=headers, json={
+        'user': user,
+        'email': email
+    })
+    return response.json()
+
+
+def create_phone(headers, user, area_code, prefix_number, phone_number):
+    response = requests.post(phone_url, headers=headers, json={
+        'user': user,
+        'area_code': area_code,
+        'prefix_number': prefix_number,
+        'phone_number': phone_number
+    })
+    return response.json()
+
+
 def main():
 	# NATURAL PERSON REGISTRASTION
 	# print(user_create(123456, "test@test"))
-	# headers = create_headers(123456, "test@test")
+	headers = create_headers(123456, "test@test")
 	# print(create_natural_person(headers, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))
  
 	# print(user_create(1234567, "test@test"))
@@ -74,8 +108,15 @@ def main():
 	# print(user_create(7654321, "test@test"))
 	# headers = create_headers(7654321, "test@test")
 	# print(create_legal_person(headers, 7654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
- ...
-
+ 
+	#ADDRESS REGISTRASTION
+	# print(create_address(headers, 123456, 'Rua Jones', '69', 'LeWhite Green', 'Varsóvia', 'Polônia', '12564789'))
+ 
+	#EMAIL REGISTRASTION
+	# print(create_email(headers, 123456, 'test@gmail.com'))
+ 
+	#PHONE REGISTRASTION
+	print(create_phone(headers, 123456, '+55', '11', '1111-1111'))
 
 if __name__ == '__main__':
 	main()

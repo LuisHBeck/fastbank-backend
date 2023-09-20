@@ -63,29 +63,37 @@ class LegalPersonViewSet(viewsets.ModelViewSet):
     
 #ADDRESS VIEW
 class AddressViewSet(viewsets.ModelViewSet):
-    queryset = Address.objects.all()
     serializer_class = AddressSerializer
     permission_classes = [
         NormalUserGetPostPut
     ]
     
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(Address, user)
     
 #EMAIL VIEW
 class EmailViewSet(viewsets.ModelViewSet):
-    queryset = Email.objects.all()
     serializer_class = EmailSerializer
     permission_classes = [
         NormalUserGetPostPut
     ]
     
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(Email, user)
+    
 
 #PHONE VIEW
 class PhoneViewSet(viewsets.ModelViewSet):
-    queryset = Phone.objects.all()
     serializer_class = PhoneSerializer
     permission_classes = [
         NormalUserGetPostPut
     ]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(Phone, user)
     
     
 #ACCOUNT VIEW
