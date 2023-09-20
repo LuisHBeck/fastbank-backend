@@ -14,6 +14,8 @@ from datetime import timedelta
 from pathlib import Path
 import os
 
+from core.permissions import NormalUserPost
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -149,8 +151,8 @@ REST_FRAMEWORK = {
     ],
     
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-        # 'rest_framework.permissions.IsAuthenticated'
+        # 'rest_framework.permissions.AllowAny'
+        'rest_framework.permissions.IsAuthenticated'
     ],
     
     'DEFAULT_THROTTLE_CLASSES': [
@@ -168,6 +170,13 @@ REST_FRAMEWORK = {
     # PAGINATION
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     # 'PAGE_SIZE': 10
+}
+
+# DJOSER CONFIGS
+DJOSER = {
+    'PERMISSIONS': {
+        'user_list': [NormalUserPost],
+    },
 }
 
 # JWT CONFIGS

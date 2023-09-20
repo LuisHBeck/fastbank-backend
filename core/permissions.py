@@ -55,3 +55,16 @@ class NormalUserGetPostPut(permissions.BasePermission):
                 return True
             return False
         return False
+    
+
+class NormalUserPostPut(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if request.user.is_superuser:
+            return True
+        
+        if request.method in 'POST PUT':
+            if request.user.is_authenticated:
+                return True
+            return False
+        return False

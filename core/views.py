@@ -32,6 +32,7 @@ from .permissions import (
     IsSuperUser,
     NormalUserGet,
     NormalUserPost,
+    NormalUserPostPut,
     NormalUserGetPostPut
 )
 
@@ -40,7 +41,7 @@ class NaturalPersonViewSet(viewsets.ModelViewSet):
     queryset = NaturalPerson.objects.all()
     serializer_class = NaturalPersonSerializer
     permission_classes = [
-		NormalUserGetPostPut
+		NormalUserPostPut
 	]
     
     
@@ -49,7 +50,7 @@ class LegalPersonViewSet(viewsets.ModelViewSet):
     queryset = LegalPerson.objects.all()
     serializer_class = LegalPersonSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserPostPut
     ]
     
 #ADDRESS VIEW
