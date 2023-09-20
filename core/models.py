@@ -7,7 +7,7 @@ class NaturalPerson(models.Model):
 	"""
         Natural Person model
     """
-	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="natural_person")
+	user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="natural_person")
 	name = models.CharField(max_length=50)
 	birth_date = models.DateField()
 	cpf = models.CharField(max_length=11)
@@ -26,7 +26,7 @@ class LegalPerson(models.Model):
 	"""
         Legal Person model
     """
-	user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="legal_person")
+	user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name="legal_person")
 	fantasy_name = models.CharField(max_length=100)
 	establishment_date = models.DateField()
 	cnpj = models.CharField(max_length=14)
@@ -57,7 +57,7 @@ class Address(Base):
 	"""
 	  Address model
 	"""
-	user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+	user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 	street = models.CharField(max_length=50)
 	number = models.CharField(max_length=5)
 	neighborhood = models.CharField(max_length=50)
@@ -78,7 +78,7 @@ class Email(Base):
     """
       Email model
     """
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user_email')
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='user_email')
     email = models.CharField(max_length=100)
     
     class Meta:
@@ -93,7 +93,7 @@ class Phone(Base):
     """
     Phone model
     """
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     area_code = models.CharField(max_length=3)
     prefix_number = models.CharField(max_length=3)
     phone_number = models.CharField(max_length=10)
