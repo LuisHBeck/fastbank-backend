@@ -91,7 +91,7 @@ class AccountSerializer(serializers.ModelSerializer):
             'number',
             'type',
             'balance',
-            'credit_Limit',
+            'credit_limit',
             'is_active'
         ]
         
