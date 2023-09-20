@@ -32,6 +32,7 @@ from .permissions import (
     IsSuperUser,
     NormalUserGet,
     NormalUserPost,
+    NormalUserGetPost,
     NormalUserPostPut,
     NormalUserGetPostPut
 )
@@ -101,8 +102,12 @@ class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPost
     ]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(Account, user)
     
 
 #INVESTMENT VIEW

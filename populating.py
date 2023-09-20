@@ -9,6 +9,7 @@ legal_person_url = os.path.join(BASE_URL, 'legal-person/')
 address_url = os.path.join(BASE_URL, 'addresses/')
 email_url = os.path.join(BASE_URL, 'emails/')
 phone_url = os.path.join(BASE_URL, 'phones/')
+account_url = os.path.join(BASE_URL, 'accounts/')
 
 
 def user_create(register_number, password, picture='a'):
@@ -90,6 +91,19 @@ def create_phone(headers, user, area_code, prefix_number, phone_number):
     return response.json()
 
 
+def create_account(headers, user, agency, number, type_a, balance, credit_limit, is_active=True):
+    response = requests.post(account_url, headers=headers, json={
+        'user': user,
+        'agency': agency,
+        'number': number,
+        'type': type_a,
+        'balance': balance,
+        'credit_limit': credit_limit,
+        'is_active': is_active
+    })
+    return response.json()
+
+
 def main():
 	# NATURAL PERSON REGISTRASTION
 	# print(user_create(123456, "test@test"))
@@ -116,7 +130,10 @@ def main():
 	# print(create_email(headers, 123456, 'test@gmail.com'))
  
 	#PHONE REGISTRASTION
-	print(create_phone(headers, 123456, '+55', '11', '1111-1111'))
+	# print(create_phone(headers, 123456, '+55', '11', '1111-1111'))
+ 
+	#ACCOUNT REGISTRASTION
+	print(create_account(headers, 123456, 1, 1, 'Current', 10000, 1000))
 
 if __name__ == '__main__':
 	main()

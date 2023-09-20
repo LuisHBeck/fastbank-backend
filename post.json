@@ -38,3 +38,13 @@
 	"prefix_number": "19",
 	"phone_number": "992097439"
 }
+
+{
+	"user": 123456,
+	"agency": 001,
+	"number": 00001,
+	"type": "Current",
+	"balance": 1500.00,
+	"credit_Limit": 3000.00,
+	"is_active": true
+}
