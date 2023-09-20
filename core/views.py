@@ -36,22 +36,30 @@ from .permissions import (
     NormalUserGetPostPut
 )
 
+from .utils.filters import filtering_by_user
+
 #NATURAL PERSON VIEW 
 class NaturalPersonViewSet(viewsets.ModelViewSet):
-    queryset = NaturalPerson.objects.all()
     serializer_class = NaturalPersonSerializer
     permission_classes = [
-		NormalUserPostPut
+		NormalUserGetPostPut
 	]
     
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(NaturalPerson, user)
     
 #LEGAL PERSON VIEW
 class LegalPersonViewSet(viewsets.ModelViewSet):
     queryset = LegalPerson.objects.all()
     serializer_class = LegalPersonSerializer
     permission_classes = [
-        NormalUserPostPut
+        NormalUserGetPostPut
     ]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(LegalPerson, user)
     
 #ADDRESS VIEW
 class AddressViewSet(viewsets.ModelViewSet):

@@ -16,7 +16,7 @@ from .views import(
 )
 
 router = SimpleRouter()
-router.register('natural-person', NaturalPersonViewSet)
+router.register('natural-person', NaturalPersonViewSet, basename='natural-person')
 router.register('legal-person', LegalPersonViewSet)
 router.register('addresses', AddressViewSet)
 router.register('emails', EmailViewSet)

@@ -58,14 +58,23 @@ def create_legal_person(headers, register_number, fantasy_name, establishment_da
 
 def main():
 	# NATURAL PERSON REGISTRASTION
-	print(user_create(123456, "test@test"))
-	headers = create_headers(123456, "test@test")
-	print(create_natural_person(headers, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))
+	# print(user_create(123456, "test@test"))
+	# headers = create_headers(123456, "test@test")
+	# print(create_natural_person(headers, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))
+ 
+	# print(user_create(1234567, "test@test"))
+	# headers = create_headers(1234567, "test@test")
+	# print(create_natural_person(headers, 1234567, 'Luís', '2004-06-19', '222222', 'Beck'))
 
 	# LEGAL PERSON REGISTRASTION
-	print(user_create(654321, "test@test"))
-	headers = create_headers(654321, "test@test")
-	print(create_legal_person(headers, 654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
+	# print(user_create(654321, "test@test"))
+	# headers = create_headers(654321, "test@test")
+	# print(create_legal_person(headers, 654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
+ 
+	# print(user_create(7654321, "test@test"))
+	# headers = create_headers(7654321, "test@test")
+	# print(create_legal_person(headers, 7654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
+ ...
 
 
 if __name__ == '__main__':
