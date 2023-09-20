@@ -99,7 +99,6 @@ class PhoneViewSet(viewsets.ModelViewSet):
     
 #ACCOUNT VIEW
 class AccountViewSet(viewsets.ModelViewSet):
-    queryset = Account.objects.all()
     serializer_class = AccountSerializer
     permission_classes = [
         NormalUserGetPost

@@ -79,7 +79,7 @@ class Email(Base):
       Email model
     """
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='user_email')
-    email = models.CharField(max_length=100)
+    email = models.CharField(max_length=100, unique=True)
     
     class Meta:
         verbose_name = 'email'

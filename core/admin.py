@@ -17,7 +17,7 @@ from .models import (
 @admin.register(NaturalPerson)
 class NaturalPersonAdmin(admin.ModelAdmin):
 	list_display = [
-   	'user',
+   		'user',
 		'name',
 		'birth_date',
 		'cpf',
@@ -42,6 +42,7 @@ class LegalPersonAdmin(admin.ModelAdmin):
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
 		'user',
 		'street',
   		'number',
@@ -56,6 +57,7 @@ class AddressAdmin(admin.ModelAdmin):
 @admin.register(Email)
 class EmailAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'user',
         'email',
     ]
@@ -65,6 +67,7 @@ class EmailAdmin(admin.ModelAdmin):
 @admin.register(Phone)
 class PhoneAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'user',
         'area_code',
 		'prefix_number',
@@ -76,6 +79,7 @@ class PhoneAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         # 'user',
 		'agency',
 		'number',
@@ -90,6 +94,7 @@ class AccountAdmin(admin.ModelAdmin):
 @admin.register(Investment)
 class InvestmentAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'id_account',
         'type',
         'contribution',
@@ -105,6 +110,7 @@ class InvestmentAdmin(admin.ModelAdmin):
 @admin.register(Loan)
 class LoanAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
 		'id_account',
 		'request_date',
 		'amount_request',
@@ -120,6 +126,7 @@ class LoanAdmin(admin.ModelAdmin):
 @admin.register(Installment)
 class InstallmentAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'id_loan',
 		'number',
 		'expiration_date',
@@ -132,6 +139,7 @@ class InstallmentAdmin(admin.ModelAdmin):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'id_account',
         'number',
         'expiration_date',
@@ -145,6 +153,7 @@ class CardAdmin(admin.ModelAdmin):
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
 	list_display = [
+		'id',
         'id_card',
         'type',
         'timestamp',
