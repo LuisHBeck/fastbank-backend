@@ -8,6 +8,7 @@ from .views import(
     EmailViewSet,
     PhoneViewSet,
     AccountViewSet,
+    CreateAccountViewSet,
     InvestmentViewSet,
     LoanViewSet,
     InstallmentViewSet,
@@ -22,7 +23,7 @@ router.register('addresses', AddressViewSet, basename='addresses')
 router.register('emails', EmailViewSet, basename='emails')
 router.register('phones', PhoneViewSet, basename='phones')
 router.register('accounts', AccountViewSet, basename='accounts')
-router.register('investments', InvestmentViewSet)
+router.register('accounts/create', CreateAccountViewSet, basename='account-create')
 router.register('loans', LoanViewSet)
 router.register('installments', InstallmentViewSet)
 router.register('cards', CardViewSet)

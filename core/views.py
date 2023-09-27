@@ -1,4 +1,7 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status, mixins, serializers
+from rest_framework.response import Response
+
+from django.contrib.auth import get_user_model
 
 from .models import (
 	NaturalPerson,
@@ -15,6 +18,7 @@ from .models import (
 )
 
 from .serializers import (
+    UserSerializer,
 	NaturalPersonSerializer,
 	LegalPersonSerializer,
 	AddressSerializer,
@@ -38,6 +42,7 @@ from .permissions import (
 )
 
 from .utils.filters import filtering_by_user
+from core import serializers
 
 #NATURAL PERSON VIEW 
 class NaturalPersonViewSet(viewsets.ModelViewSet):
@@ -101,12 +106,45 @@ class PhoneViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ModelViewSet):
     serializer_class = AccountSerializer
     permission_classes = [
-        NormalUserGetPost
+        NormalUserGet
     ]
     
     def get_queryset(self):
         user = self.request.user
         return filtering_by_user(Account, user)
+    
+    
+class CreateAccountViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    permission_classes = [
+        IsSuperUser
+    ]
+    serializer_class = UserSerializer
+    
+    def create_account(self, request):
+        last_account = Account.objects.order_by('-number').first()
+        if last_account:
+            next_account = last_account.number + 1
+        else:
+            next_account = 1
+            
+        user = self.request.user
+        agency = 1
+        number = f'{next_account:03}'
+        type = 'Savings'
+        balance = 0
+        credit_limit = 500
+        
+        account = Account.objects.create(
+            user = user,
+            agency=agency,
+            number=int(number),
+            type=type,
+            balance=balance,
+            credit_limit=credit_limit    
+        )
+        
+        
+        return Response({'message': 'Successfully created'}, status=status.HTTP_201_CREATED)
     
 
 #INVESTMENT VIEW
