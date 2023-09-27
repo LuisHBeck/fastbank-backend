@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status, mixins, serializers
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 
 from django.contrib.auth import get_user_model
@@ -114,13 +114,11 @@ class AccountViewSet(viewsets.ModelViewSet):
         return filtering_by_user(Account, user)
     
     
-class CreateAccountViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    permission_classes = [
-        IsSuperUser
-    ]
+class CreateAccountViewSet(viewsets.GenericViewSet):
+    permission_classes = [IsSuperUser]
     serializer_class = UserSerializer
-    
-    def create_account(self, request):
+
+    def create(self, request):
         last_account = Account.objects.order_by('-number').first()
         if last_account:
             next_account = last_account.number + 1
@@ -135,16 +133,15 @@ class CreateAccountViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         credit_limit = 500
         
         account = Account.objects.create(
-            user = user,
             agency=agency,
             number=int(number),
             type=type,
             balance=balance,
-            credit_limit=credit_limit    
+            credit_limit=credit_limit
         )
+        account.user.add(user)
         
-        
-        return Response({'message': 'Successfully created'}, status=status.HTTP_201_CREATED)
+        return Response({'Successfully created': f'Agency: {agency}, Number: {number}, Credit Limit: R${credit_limit}'}, status=status.HTTP_201_CREATED)
     
 
 #INVESTMENT VIEW

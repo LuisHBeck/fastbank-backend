@@ -23,12 +23,12 @@ router.register('addresses', AddressViewSet, basename='addresses')
 router.register('emails', EmailViewSet, basename='emails')
 router.register('phones', PhoneViewSet, basename='phones')
 router.register('accounts', AccountViewSet, basename='accounts')
-router.register('accounts/create', CreateAccountViewSet, basename='account-create')
+router.register('accounts-create', CreateAccountViewSet, basename='create-account')
 router.register('loans', LoanViewSet)
 router.register('installments', InstallmentViewSet)
 router.register('cards', CardViewSet)
 router.register('transactions', TransactionViewSet)
 
 urlpatterns = [
-	
+  
 ]
