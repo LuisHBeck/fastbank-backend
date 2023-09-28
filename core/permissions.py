@@ -57,19 +57,6 @@ class NormalUserGetPost(permissions.BasePermission):
         return False
        
 
-class NormalUserGetPostPut(permissions.BasePermission):
-
-    def has_permission(self, request, view):
-        if request.user.is_superuser:
-            return True
-        
-        if request.method in 'GET POST PUT':
-            if request.user.is_authenticated:
-                return True
-            return False
-        return False
-    
-
 class NormalUserGetPostPatch(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -83,13 +70,13 @@ class NormalUserGetPostPatch(permissions.BasePermission):
         return False
     
 
-class NormalUserPostPut(permissions.BasePermission):
+class NormalUserPostPatch(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if request.user.is_superuser:
             return True
         
-        if request.method in 'POST PUT':
+        if request.method in 'POST PATCH':
             if request.user.is_authenticated:
                 return True
             return False

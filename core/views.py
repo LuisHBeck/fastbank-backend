@@ -39,8 +39,7 @@ from .permissions import (
     NormalUserGet,
     NormalUserPost,
     NormalUserGetPost,
-    NormalUserPostPut,
-    NormalUserGetPostPut,
+    NormalUserPostPatch,
     NormalUserGetPostPatch
 )
 
@@ -51,7 +50,7 @@ from core import serializers
 class NaturalPersonViewSet(viewsets.ModelViewSet):
     serializer_class = NaturalPersonSerializer
     permission_classes = [
-		NormalUserGetPostPut
+		NormalUserGetPostPatch
 	]
     
     def get_queryset(self):
@@ -63,7 +62,7 @@ class LegalPersonViewSet(viewsets.ModelViewSet):
     queryset = LegalPerson.objects.all()
     serializer_class = LegalPersonSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     def get_queryset(self):
@@ -74,7 +73,7 @@ class LegalPersonViewSet(viewsets.ModelViewSet):
 class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     def get_queryset(self):
@@ -85,7 +84,7 @@ class AddressViewSet(viewsets.ModelViewSet):
 class EmailViewSet(viewsets.ModelViewSet):
     serializer_class = EmailSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     def get_queryset(self):
@@ -97,7 +96,7 @@ class EmailViewSet(viewsets.ModelViewSet):
 class PhoneViewSet(viewsets.ModelViewSet):
     serializer_class = PhoneSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     def get_queryset(self):
@@ -158,7 +157,7 @@ class InvestmentViewSet(viewsets.ModelViewSet):
     queryset = Investment.objects.all()
     serializer_class = InvestmentSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     
@@ -167,7 +166,7 @@ class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
 
@@ -176,7 +175,7 @@ class InstallmentViewSet(viewsets.ModelViewSet):
     queryset = Installment.objects.all()
     serializer_class = InstallmentSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
 
@@ -185,7 +184,7 @@ class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
     
     
@@ -194,5 +193,5 @@ class TransactionViewSet(viewsets.ModelViewSet):
     queryset = Transaction.objects.all()
     serializer_class = TransactionSerializer
     permission_classes = [
-        NormalUserGetPostPut
+        NormalUserGetPostPatch
     ]
