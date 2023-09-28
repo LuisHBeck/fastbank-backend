@@ -25,6 +25,7 @@ from .serializers import (
  	EmailSerializer,
 	PhoneSerializer,
     AccountSerializer,
+    AccountRequestSerializer,
     InvestmentSerializer,
     LoanSerializer,
     InstallmentSerializer,
@@ -115,8 +116,10 @@ class AccountViewSet(viewsets.ModelViewSet):
     
     
 class CreateAccountViewSet(viewsets.GenericViewSet):
-    permission_classes = [IsSuperUser]
-    serializer_class = UserSerializer
+    permission_classes = [
+        NormalUserPost
+    ]
+    serializer_class = AccountRequestSerializer
 
     def create(self, request):
         last_account = Account.objects.order_by('-number').first()
@@ -128,7 +131,7 @@ class CreateAccountViewSet(viewsets.GenericViewSet):
         user = self.request.user
         agency = 1
         number = f'{next_account:03}'
-        type = 'Savings'
+        type = request.data.get('type')
         balance = 0
         credit_limit = 500
         

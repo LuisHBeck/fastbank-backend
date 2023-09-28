@@ -21,7 +21,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = [
-            'resgister_number',
+            'register_number',
             'password',
         ]
         
@@ -104,6 +104,15 @@ class AccountSerializer(serializers.ModelSerializer):
             'balance',
             'credit_limit',
             'is_active'
+        ]
+        
+        
+class AccountRequestSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Account
+        fields = [
+            'type'
         ]
         
 
