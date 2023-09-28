@@ -15,8 +15,8 @@ class NaturalPerson(models.Model):
 	social_name = models.CharField(max_length=50)
 
 	class Meta:
-		verbose_name = 'natural person'
-		verbose_name_plural = 'natural persons'
+		verbose_name = 'natural people'
+		verbose_name_plural = 'natural people'
 
 	def __str__(self) -> str:
 		return f'{self.cpf}'
@@ -35,8 +35,8 @@ class LegalPerson(models.Model):
 	legal_nature = models.CharField(max_length=100)
 
 	class Meta:
-		verbose_name = 'legal person'
-		verbose_name_plural = 'legal persons'
+		verbose_name = 'legal people'
+		verbose_name_plural = 'legal people'
 
 	def __str__(self) -> str:
 		return f'{self.cnpj}'
