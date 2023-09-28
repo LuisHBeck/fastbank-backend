@@ -115,6 +115,15 @@ class AccountRequestSerializer(serializers.ModelSerializer):
             'type'
         ]
         
+        
+class AccountPatchSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Account
+        fields = [
+            'user'
+        ]
+        
 
 class InvestmentSerializer(serializers.ModelSerializer):
     

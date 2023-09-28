@@ -25,6 +25,7 @@ from .serializers import (
  	EmailSerializer,
 	PhoneSerializer,
     AccountSerializer,
+    AccountPatchSerializer,
     AccountRequestSerializer,
     InvestmentSerializer,
     LoanSerializer,
@@ -39,7 +40,8 @@ from .permissions import (
     NormalUserPost,
     NormalUserGetPost,
     NormalUserPostPut,
-    NormalUserGetPostPut
+    NormalUserGetPostPut,
+    NormalUserGetPostPatch
 )
 
 from .utils.filters import filtering_by_user
@@ -105,16 +107,20 @@ class PhoneViewSet(viewsets.ModelViewSet):
     
 #ACCOUNT VIEW
 class AccountViewSet(viewsets.ModelViewSet):
-    serializer_class = AccountSerializer
     permission_classes = [
-        NormalUserGet
+        NormalUserGetPostPatch
     ]
     
     def get_queryset(self):
         user = self.request.user
         return filtering_by_user(Account, user)
     
-    
+    def get_serializer_class(self):
+        if self.request.method == 'PATCH':
+            return AccountPatchSerializer
+        return AccountSerializer
+
+
 class CreateAccountViewSet(viewsets.GenericViewSet):
     permission_classes = [
         NormalUserPost

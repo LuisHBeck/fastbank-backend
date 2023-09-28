@@ -70,6 +70,19 @@ class NormalUserGetPostPut(permissions.BasePermission):
         return False
     
 
+class NormalUserGetPostPatch(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        if request.user.is_superuser:
+            return True
+        
+        if request.method in 'GET POST PATCH':
+            if request.user.is_authenticated:
+                return True
+            return False
+        return False
+    
+
 class NormalUserPostPut(permissions.BasePermission):
 
     def has_permission(self, request, view):
