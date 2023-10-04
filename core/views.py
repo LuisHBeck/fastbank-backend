@@ -133,7 +133,7 @@ class CreateAccountViewSet(viewsets.GenericViewSet):
         if last_account:
             next_account = last_account.number + 1
         else:
-            next_account = 1
+            next_account = 1111
             
         user = self.request.user
         agency = 1
@@ -165,11 +165,14 @@ class InvestmentViewSet(viewsets.ModelViewSet):
 
 #ACCOUNT INVESTMENT VIEW
 class AccountInvestmentViewSet(viewsets.ModelViewSet):
-    queryset = AccountInvestments.objects.all()
     serializer_class = AccountInvestmentSerializer
     permission_classes = [
         NormalUserGetPostPatch
     ]
+
+    def get_queryset(self):
+        user = self.request.user
+        return filtering_by_user(Account, user)
     
     
 #LOAN VIEW
