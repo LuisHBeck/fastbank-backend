@@ -11,6 +11,7 @@ from .models import (
 	Phone,
     Account,
     Investment,
+    AccountInvestments,
     Loan,
     Installment,
     Card,
@@ -28,6 +29,7 @@ from .serializers import (
     AccountPatchSerializer,
     AccountRequestSerializer,
     InvestmentSerializer,
+    AccountInvestmentSerializer,
     LoanSerializer,
     InstallmentSerializer,
     CardSerializer,
@@ -158,6 +160,15 @@ class InvestmentViewSet(viewsets.ModelViewSet):
     serializer_class = InvestmentSerializer
     permission_classes = [
         NormalUserGet
+    ]
+
+
+#ACCOUNT INVESTMENT VIEW
+class AccountInvestmentViewSet(viewsets.ModelViewSet):
+    queryset = AccountInvestments.objects.all()
+    serializer_class = AccountInvestmentSerializer
+    permission_classes = [
+        NormalUserGetPostPatch
     ]
     
     

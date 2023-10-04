@@ -148,11 +148,11 @@ def main():
 	server_process.start()
 	sleep(1)
 
-	superuser_creation()
+	
 
 	# SUPER USER HEADER
-	# create_superuser()
-	# super_user_header = create_headers(123,'123')
+	superuser_creation()
+	super_user_header = create_headers(123,'123')
 
 	# NATURAL PERSON REGISTRASTION
 	print(user_create(123456, "test@test"))
@@ -187,7 +187,7 @@ def main():
 	print(create_account(headers_3, 'Current'))	
 
 	# INVESTMENT REGISTRATION
-	# print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
+	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
 
 	# server_process.join()
 

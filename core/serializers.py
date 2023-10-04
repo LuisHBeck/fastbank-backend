@@ -10,6 +10,7 @@ from .models import (
 	Phone,
     Account,
 	Investment,
+    AccountInvestments,
 	Loan,
 	Installment,
 	Card,
@@ -138,6 +139,16 @@ class InvestmentSerializer(serializers.ModelSerializer):
             'profitability',
             'is_active'
 		]
+
+
+class AccountInvestmentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AccountInvestments
+        fields = [
+            'id_account',
+            'id_investment'
+        ]
         
 
 class LoanSerializer(serializers.ModelSerializer):
