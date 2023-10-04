@@ -157,7 +157,7 @@ class InvestmentViewSet(viewsets.ModelViewSet):
     queryset = Investment.objects.all()
     serializer_class = InvestmentSerializer
     permission_classes = [
-        NormalUserGetPostPatch
+        NormalUserGet
     ]
     
     

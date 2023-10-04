@@ -128,14 +128,13 @@ class Account(Base):
 		verbose_name_plural = 'accounts'
 
 	def __str__(self):
-		return f'{self.agency} {self.number}'
+		return f'{self.number}'
 	
 
 class Investment(Base):
 	"""
       Investment model
     """
-	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
 	type = models.CharField(max_length=50)
 	contribution = models.DecimalField(decimal_places=2, max_digits=7)
 	admin_fee = models.DecimalField(decimal_places=2, max_digits=7)
@@ -150,6 +149,21 @@ class Investment(Base):
 
 	def __str__(self):
 		return f'{self.type}'
+	
+	
+class AccountInvestments(Base):
+	"""
+		Account Investments
+	"""
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	id_investment = models.ForeignKey(Investment, on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name = 'Account Investment'
+		verbose_name_plural = 'Account Investments'
+
+	def __str__(self) -> str:
+		return f'{self.id_account} {self.id_account}'
 	
 
 class Loan(Base):
@@ -215,7 +229,7 @@ class Transaction(Base):
       Transaction model
     """
 	id_card = models.ForeignKey(Card, on_delete=models.CASCADE)
-	type = models.CharField(max_length=25)
+	# type = models.CharField(max_length=25)
 	timestamp = models.DateField()
 	operation = models.CharField(max_length=25)
 	amount = models.DecimalField(decimal_places=2, max_digits=7)

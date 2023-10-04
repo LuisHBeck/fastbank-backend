@@ -130,7 +130,6 @@ class InvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investment
         fields = [
-			'id_account',
 			'type',
             'contribution',
             'admin_fee',

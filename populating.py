@@ -11,6 +11,7 @@ address_url = os.path.join(BASE_URL, 'addresses/')
 email_url = os.path.join(BASE_URL, 'emails/')
 phone_url = os.path.join(BASE_URL, 'phones/')
 account_url = os.path.join(BASE_URL, 'accounts-create/')
+investment_url = os.path.join(BASE_URL, 'investments/')
 
 
 def data_base_creation():
@@ -119,12 +120,28 @@ def create_account(headers, type):
     return response.json()
 
 
+def create_investment(headers, type, contribution, admin_fee, period, risc_rate, profitability, is_active=True):
+	response = requests.post(investment_url, headers=headers, json={
+		'type':type,
+		'contribution':contribution,
+		'admin_fee': admin_fee,
+		'period': period, 
+		'risc_rate': risc_rate,
+		'profitability': profitability,
+		'is_active': is_active
+	})
+	return response.json()
+
+
 def main():
 	#CREATING DATABSE
 	data_base_creation()
 	server_process = multiprocessing.Process(target=run_server)
 	server_process.start()
 	sleep(1)
+
+	# SUPER USER HEADER
+	super_user_header = create_headers(123,'123')
 
 	# NATURAL PERSON REGISTRASTION
 	print(user_create(123456, "test@test"))
@@ -157,6 +174,9 @@ def main():
 	# ACCOUNT REGISTRASTION
 	print(create_account(headers_1, 'Savings'))
 	print(create_account(headers_3, 'Current'))	
+
+	# INVESTMENT REGISTRATION
+	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
 
 	# server_process.join()
 

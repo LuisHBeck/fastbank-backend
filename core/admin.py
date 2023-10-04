@@ -8,6 +8,7 @@ from .models import (
 	Phone,
 	Account,
 	Investment,
+	AccountInvestments,
 	Loan,
 	Installment,
 	Card,
@@ -95,7 +96,6 @@ class AccountAdmin(admin.ModelAdmin):
 class InvestmentAdmin(admin.ModelAdmin):
 	list_display = [
 		'id',
-        'id_account',
         'type',
         'contribution',
         'admin_fee',
@@ -103,6 +103,15 @@ class InvestmentAdmin(admin.ModelAdmin):
 		'risc_rate',
 		'profitability',
 		'is_active',
+	]
+	ordering = ['id']
+
+
+@admin.register(AccountInvestments)
+class AccountInvestmentsAdmin(admin.ModelAdmin):
+	list_display = [
+		'id_account',
+		'id_investment'
 	]
 	ordering = ['id']
 
@@ -155,7 +164,6 @@ class TransactionAdmin(admin.ModelAdmin):
 	list_display = [
 		'id',
         'id_card',
-        'type',
         'timestamp',
         'operation',
 		'amount',
