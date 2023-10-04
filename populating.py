@@ -24,14 +24,22 @@ def data_base_creation():
 	except Exception as e:
 		print(e)	
 
-
 def run_server():
 	try:
 		subprocess.run(['py', 'manage.py', 'runserver', '8056'], check=True)
 	except subprocess.CalledProcessError as e:
 		print(e)
 	except Exception as e:
-		print(e)	
+		print(e)
+
+
+def superuser_creation():
+	try:
+		subprocess.run(['py', 'manage.py', 'create_superuser'], check=True)
+	except subprocess.CalledProcessError as e:
+		print(e)
+	except Exception as e:
+		print(e)		
 
 
 def user_create(register_number, password, picture='a'):
@@ -42,7 +50,7 @@ def user_create(register_number, password, picture='a'):
 			"password": password,
 		})
 	return response.json()
-	
+
 
 def create_headers(register_number, password):
 	response = requests.post(jwt_create_url, 
@@ -140,8 +148,11 @@ def main():
 	server_process.start()
 	sleep(1)
 
+	superuser_creation()
+
 	# SUPER USER HEADER
-	super_user_header = create_headers(123,'123')
+	# create_superuser()
+	# super_user_header = create_headers(123,'123')
 
 	# NATURAL PERSON REGISTRASTION
 	print(user_create(123456, "test@test"))
@@ -176,7 +187,7 @@ def main():
 	print(create_account(headers_3, 'Current'))	
 
 	# INVESTMENT REGISTRATION
-	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
+	# print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
 
 	# server_process.join()
 
