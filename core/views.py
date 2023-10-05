@@ -30,6 +30,7 @@ from .serializers import (
     AccountRequestSerializer,
     InvestmentSerializer,
     AccountInvestmentSerializer,
+    AccountInvestmentResponseSerializer,
     LoanSerializer,
     InstallmentSerializer,
     CardSerializer,
@@ -171,8 +172,8 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        user = self.request.user
-        return filtering_by_user(Account, user)
+        account = self.kwargs['account']
+        return AccountInvestments.objects.filter(id_account=account)
     
     
 #LOAN VIEW

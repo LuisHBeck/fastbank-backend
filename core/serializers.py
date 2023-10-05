@@ -149,6 +149,15 @@ class AccountInvestmentSerializer(serializers.ModelSerializer):
             'id_account',
             'id_investment'
         ]
+
+
+class AccountInvestmentResponseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AccountInvestments
+        fields = [
+            'id_account'
+        ]
         
 
 class LoanSerializer(serializers.ModelSerializer):

@@ -148,7 +148,7 @@ class Investment(Base):
 		verbose_name_plural = 'investments'
 
 	def __str__(self):
-		return f'{self.type}'
+		return f'{self.pk} {self.type}'
 	
 	
 class AccountInvestments(Base):

@@ -10,6 +10,7 @@ from .views import(
     AccountViewSet,
     CreateAccountViewSet,
     InvestmentViewSet,
+    AccountInvestmentViewSet,
     LoanViewSet,
     InstallmentViewSet,
     CardViewSet,
@@ -24,12 +25,12 @@ router.register('emails', EmailViewSet, basename='emails')
 router.register('phones', PhoneViewSet, basename='phones')
 router.register('accounts', AccountViewSet, basename='accounts')
 router.register('accounts-create', CreateAccountViewSet, basename='create-account')
-router.register('investments', InvestmentViewSet)
+router.register('investments', InvestmentViewSet, basename='investments')
 router.register('loans', LoanViewSet)
 router.register('installments', InstallmentViewSet)
 router.register('cards', CardViewSet)
 router.register('transactions', TransactionViewSet)
 
 urlpatterns = [
-  
+	path('investments/account/<int:account>/', AccountInvestmentViewSet.as_view({'get': 'list'}), name='account-investments')
 ]
