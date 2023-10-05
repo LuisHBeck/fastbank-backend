@@ -14,6 +14,7 @@ from .views import(
     LoanViewSet,
     InstallmentViewSet,
     CardViewSet,
+    CreateCardViewSet,
     TransactionViewSet,
 )
 
@@ -24,12 +25,13 @@ router.register('addresses', AddressViewSet, basename='addresses')
 router.register('emails', EmailViewSet, basename='emails')
 router.register('phones', PhoneViewSet, basename='phones')
 router.register('accounts', AccountViewSet, basename='accounts')
-router.register('accounts-create', CreateAccountViewSet, basename='create-account')
+router.register('accounts-new', CreateAccountViewSet, basename='create-account')
 router.register('investments', InvestmentViewSet, basename='investments')
 router.register('investments/account/new', AccountInvestmentViewSet, basename='account-investments')
 router.register('loans', LoanViewSet)
 router.register('installments', InstallmentViewSet)
 router.register('cards', CardViewSet)
+router.register('cards-new', CreateCardViewSet, basename='new-card')
 router.register('transactions', TransactionViewSet)
 
 urlpatterns = [

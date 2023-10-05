@@ -10,9 +10,10 @@ legal_person_url = os.path.join(BASE_URL, 'legal-people/')
 address_url = os.path.join(BASE_URL, 'addresses/')
 email_url = os.path.join(BASE_URL, 'emails/')
 phone_url = os.path.join(BASE_URL, 'phones/')
-account_url = os.path.join(BASE_URL, 'accounts-create/')
+account_url = os.path.join(BASE_URL, 'accounts-new/')
 investment_url = os.path.join(BASE_URL, 'investments/')
-account_investment_url = os.path.join(BASE_URL, 'investments/account/')
+account_investment_url = os.path.join(BASE_URL, 'investments/account/new/')
+card_new_url = os.path.join('cards-new')
 
 
 def data_base_creation():
@@ -143,7 +144,11 @@ def create_investment(headers, type, contribution, admin_fee, period, risc_rate,
 
 
 def create_account_investment(headers, id_account, id_investment):
-	response = requests.post()
+	response = requests.post(account_investment_url, headers=headers, json={
+		'id_account':id_account,
+		'id_investment':id_investment
+	})
+	return response.json()
 
 
 def main():
@@ -191,6 +196,12 @@ def main():
 
 	# INVESTMENT REGISTRATION
 	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
+	print(create_investment(super_user_header, 'BCT', 192.25, 3.5, '2030-12-11', 5.2, 29.6))
+
+	print(create_account_investment(headers_1, 1,1))
+	print(create_account_investment(headers_1, 1,2))
+	print(create_account_investment(headers_1, 2,1))
+	print(create_account_investment(headers_1, 2,2))
 
 	# server_process.join()
 

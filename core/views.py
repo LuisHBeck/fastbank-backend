@@ -1,7 +1,9 @@
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
-from django.contrib.auth import get_user_model
+import random
+from datetime import datetime, timedelta
 
 from .models import (
 	NaturalPerson,
@@ -19,7 +21,6 @@ from .models import (
 )
 
 from .serializers import (
-    UserSerializer,
 	NaturalPersonSerializer,
 	LegalPersonSerializer,
 	AddressSerializer,
@@ -33,6 +34,7 @@ from .serializers import (
     LoanSerializer,
     InstallmentSerializer,
     CardSerializer,
+    CardRequestSerializer,
     TransactionSerializer,
 )
 
@@ -200,6 +202,33 @@ class CardViewSet(viewsets.ModelViewSet):
     permission_classes = [
         NormalUserGetPostPatch
     ]
+
+
+class CreateCardViewSet(viewsets.GenericViewSet):
+    permission_classes = [
+        NormalUserPost
+    ]
+    serializer_class = CardRequestSerializer
+
+    def create(self, request):
+        size = 12
+        number = random.randint(10 ** (size - 1), (10 ** size) - 1)
+        cv = random.randint(10 ** (3 - 1), (10 ** 3) - 1)
+        current_date = datetime.now()
+        expiration_date = current_date + timedelta(days=(30 * 45))
+        id_account = request.data.get('id_account')
+        account = get_object_or_404(Account, pk=id_account)
+
+        card = Card.objects.create(
+            id_account=account,
+            number=number,
+            expiration_date=expiration_date,
+            flag="Mastercad",
+            verification_code=cv,
+            is_active=True,
+        )
+        
+        return Response({'Successfully created': f'Number: {number}, Expiration: {expiration_date}, Verification Code: {cv}'}, status=status.HTTP_201_CREATED)
     
     
 #TRANSACTION VIEW

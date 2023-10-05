@@ -190,6 +190,15 @@ class CardSerializer(serializers.ModelSerializer):
             'verification_code',
             'is_active',
 		]
+
+
+class CardRequestSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Card
+        fields = [
+            'id_account'
+        ]
         
 
 class TransactionSerializer(serializers.ModelSerializer):
