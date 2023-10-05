@@ -5,13 +5,14 @@ BASE_URL = 'http://127.0.0.1:8056/api/v1/'
 
 user_create_url = os.path.join(BASE_URL, 'auth/users/')
 jwt_create_url = os.path.join(BASE_URL, 'auth/jwt/create/')
-natural_person_url = os.path.join(BASE_URL, 'natural-person/')
-legal_person_url = os.path.join(BASE_URL, 'legal-person/')
+natural_person_url = os.path.join(BASE_URL, 'natural-people/')
+legal_person_url = os.path.join(BASE_URL, 'legal-people/')
 address_url = os.path.join(BASE_URL, 'addresses/')
 email_url = os.path.join(BASE_URL, 'emails/')
 phone_url = os.path.join(BASE_URL, 'phones/')
 account_url = os.path.join(BASE_URL, 'accounts-create/')
 investment_url = os.path.join(BASE_URL, 'investments/')
+account_investment_url = os.path.join(BASE_URL, 'investments/account/')
 
 
 def data_base_creation():
@@ -141,14 +142,16 @@ def create_investment(headers, type, contribution, admin_fee, period, risc_rate,
 	return response.json()
 
 
+def create_account_investment(headers, id_account, id_investment):
+	response = requests.post()
+
+
 def main():
 	#CREATING DATABSE
 	data_base_creation()
 	server_process = multiprocessing.Process(target=run_server)
 	server_process.start()
 	sleep(1)
-
-	
 
 	# SUPER USER HEADER
 	superuser_creation()

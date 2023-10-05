@@ -30,7 +30,6 @@ from .serializers import (
     AccountRequestSerializer,
     InvestmentSerializer,
     AccountInvestmentSerializer,
-    AccountInvestmentResponseSerializer,
     LoanSerializer,
     InstallmentSerializer,
     CardSerializer,
@@ -168,7 +167,7 @@ class InvestmentViewSet(viewsets.ModelViewSet):
 class AccountInvestmentViewSet(viewsets.ModelViewSet):
     serializer_class = AccountInvestmentSerializer
     permission_classes = [
-        NormalUserGetPostPatch
+        NormalUserPost
     ]
 
     def get_queryset(self):
