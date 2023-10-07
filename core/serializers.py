@@ -163,6 +163,18 @@ class LoanSerializer(serializers.ModelSerializer):
             'installment_amount',
             'observation'	
 		]
+
+
+class CreateLoanSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Loan
+        fields = [
+            'id_account',
+            'amount_request',
+            'installment_amount',
+            'observation'
+        ]
         
     
 class InstallmentSerializer(serializers.ModelSerializer):

@@ -32,6 +32,7 @@ from .serializers import (
     InvestmentSerializer,
     AccountInvestmentSerializer,
     LoanSerializer,
+    CreateLoanSerializer,
     InstallmentSerializer,
     CardSerializer,
     CardRequestSerializer,
@@ -184,7 +185,39 @@ class LoanViewSet(viewsets.ModelViewSet):
     permission_classes = [
         NormalUserGetPostPatch
     ]
-    
+
+
+class CreateLoanViewSet(viewsets.GenericViewSet):
+    permission_classes = [
+        NormalUserGetPost
+    ]
+    serializer_class = CreateLoanSerializer
+
+    def create(self, request):
+        request_date = datetime.now()
+        interest_rate = 15
+        is_approved = True
+        approval_date = datetime.now()
+        amount_request = request.data.get('amount_request')
+        installment_amount = request.data.get('installment_amount')
+        observation = request.data.get('observation')
+        id_account = request.data.get('id_account')
+        account = get_object_or_404(Account, pk=id_account)
+
+        loan = Loan.objects.create(
+            id_account = account,
+            request_date = request_date,
+            amount_request = amount_request,
+            interest_rate = interest_rate,
+            is_approved = is_approved,
+            approval_date = approval_date,
+            installment_amount = installment_amount,
+            observation = observation
+        )
+
+        return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
+
+
 
 #INSTALLMENT VIEW
 class InstallmentViewSet(viewsets.ModelViewSet):

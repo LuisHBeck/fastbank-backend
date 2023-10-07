@@ -12,6 +12,7 @@ from .views import(
     InvestmentViewSet,
     AccountInvestmentViewSet,
     LoanViewSet,
+    CreateLoanViewSet,
     InstallmentViewSet,
     CardViewSet,
     CreateCardViewSet,
@@ -29,6 +30,7 @@ router.register('accounts-new', CreateAccountViewSet, basename='create-account')
 router.register('investments', InvestmentViewSet, basename='investments')
 router.register('investments/account/new', AccountInvestmentViewSet, basename='account-investments')
 router.register('loans', LoanViewSet)
+router.register('loans-new', CreateLoanViewSet, basename='create-loan')
 router.register('installments', InstallmentViewSet)
 router.register('cards', CardViewSet)
 router.register('cards-new', CreateCardViewSet, basename='new-card')
