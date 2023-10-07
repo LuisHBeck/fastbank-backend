@@ -12,7 +12,7 @@ from .models import (
 	Loan,
 	Installment,
 	Card,
-	Transaction,
+	CardTransaction,
 )
 
 @admin.register(NaturalPerson)
@@ -159,8 +159,8 @@ class CardAdmin(admin.ModelAdmin):
 	ordering = ['id']
 
 
-@admin.register(Transaction)
-class TransactionAdmin(admin.ModelAdmin):
+@admin.register(CardTransaction)
+class CardTransactionAdmin(admin.ModelAdmin):
 	list_display = [
 		'id',
         'id_card',

@@ -18,7 +18,7 @@ from .models import (
     Loan,
     Installment,
     Card,
-    Transaction,
+    CardTransaction,
 )
 
 from .serializers import (
@@ -37,7 +37,7 @@ from .serializers import (
     InstallmentSerializer,
     CardSerializer,
     CardRequestSerializer,
-    TransactionSerializer,
+    CardTransactionSerializer,
 )
 
 from .permissions import (
@@ -280,9 +280,31 @@ class CreateCardViewSet(viewsets.GenericViewSet):
     
     
 #TRANSACTION VIEW
-class TransactionViewSet(viewsets.ModelViewSet):
-    queryset = Transaction.objects.all()
-    serializer_class = TransactionSerializer
+class CardTransactionViewSet(viewsets.GenericViewSet):
+    serializer_class = CardTransactionSerializer
     permission_classes = [
         NormalUserGetPostPatch
     ]
+
+    def create(self, request):
+        timestamp = datetime.now()
+        id_card = request.data.get('id_card')
+        card = get_object_or_404(Card, pk=id_card)
+        operation = "Debit"
+        amount = request.data.get('amount')
+
+        id_account = request.data.get('id_account')
+        account = get_object_or_404(Account, pk=id_account)
+
+        if (account.balance >= amount):
+            card_transaction = CardTransaction.objects.create(
+                id_card = card,
+                timestamp = timestamp,
+                operation = operation,
+                amount = amount
+            )
+            account.balance -= Decimal(amount)
+            account.save()
+            return Response({'Success': 'Successfully created'}, status=status.HTTP_201_CREATED)
+        
+        return Response({'Fail': 'Insufficient bunds'}, status=status.HTTP_201_CREATED)

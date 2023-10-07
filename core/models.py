@@ -224,19 +224,18 @@ class Card(Base):
 		return f'{self.number}'
 	
 
-class Transaction(Base):
+class CardTransaction(Base):
 	"""
       Transaction model
     """
 	id_card = models.ForeignKey(Card, on_delete=models.CASCADE)
-	# type = models.CharField(max_length=25)
 	timestamp = models.DateField()
 	operation = models.CharField(max_length=25)
 	amount = models.DecimalField(decimal_places=2, max_digits=7)
 
 	class Meta:
-		verbose_name = 'transaction'
-		verbose_name_plural = 'transactions'
+		verbose_name = 'Card transaction'
+		verbose_name_plural = 'Card transactions'
 
 	def __str__(self):
 		return f'{self.type}' 

@@ -14,7 +14,7 @@ from .models import (
 	Loan,
 	Installment,
 	Card,
-	Transaction
+	CardTransaction
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -213,14 +213,14 @@ class CardRequestSerializer(serializers.ModelSerializer):
         ]
         
 
-class TransactionSerializer(serializers.ModelSerializer):
+class CardTransactionSerializer(serializers.ModelSerializer):
+
+    custom_field = serializers.IntegerField(write_only=True)
     
     class Meta:
-        model = Transaction
+        model = CardTransaction
         fields = [
             'id_card',
-            'type',
-            'timestamp',
             'operation',
             'amount'
 		]
