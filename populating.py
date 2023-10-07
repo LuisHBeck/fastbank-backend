@@ -13,7 +13,7 @@ phone_url = os.path.join(BASE_URL, 'phones/')
 account_url = os.path.join(BASE_URL, 'accounts-new/')
 investment_url = os.path.join(BASE_URL, 'investments/')
 account_investment_url = os.path.join(BASE_URL, 'investments/account/new/')
-card_new_url = os.path.join('cards-new')
+card_new_url = os.path.join(BASE_URL, 'cards-new/')
 create_loan_url = os.path.join(BASE_URL, 'loans-new/')
 
 
@@ -162,6 +162,13 @@ def create_loan(headers, id_account, amount, installment_amount, observation):
 	return response.json()
 
 
+def create_card(headers, id_account):
+	response = requests.post(card_new_url, headers=headers, json={
+		'id_account': id_account
+	})
+	return response.json()
+
+
 def main():
 	#CREATING DATABSE
 	data_base_creation()
@@ -215,6 +222,8 @@ def main():
 	print(create_account_investment(headers_1, 2,2))
 
 	print(create_loan(headers_1, 1, 1759.25, 4, "personal use"))
+
+	print(create_card(headers_1, 1))
 
 	# server_process.join()
 
