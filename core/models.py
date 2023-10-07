@@ -184,7 +184,7 @@ class Loan(Base):
 		verbose_name_plural = 'loans'
 
 	def __str__(self):
-		return f'{self.amount_request}'
+		return f'{self.pk}'
 	
 
 class Installment(Base):
