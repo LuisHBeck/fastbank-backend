@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 
 import random
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 from .models import (
 	NaturalPerson,
@@ -225,6 +226,9 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
                 expiration_date = request_date + timedelta(days=(30 * installment)),
                 payment_amount = installment_amount_value
             )
+
+        account.balance += Decimal(amount_request)
+        account.save()
 
         return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
 
