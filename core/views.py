@@ -203,6 +203,8 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
         observation = request.data.get('observation')
         id_account = request.data.get('id_account')
         account = get_object_or_404(Account, pk=id_account)
+        rate_amount = amount_request * (interest_rate/100) 
+        final_amout = amount_request + rate_amount
 
         loan = Loan.objects.create(
             id_account = account,
@@ -214,6 +216,14 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
             installment_amount = installment_amount,
             observation = observation
         )
+
+        for installment in range(installment_amount):
+            installment_ = Installment.objects.create(
+                id_loan = get_object_or_404(Loan, pk=1),
+                number = installment + 1,
+                expiration_date = request_date + timedelta(days=(30 * installment)),
+                payment_amount = final_amout
+            )
 
         return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
 
