@@ -31,6 +31,15 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+# api communication start
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+# api communication end
+
 
 # Application definition
 
@@ -49,12 +58,18 @@ INSTALLED_APPS = [
 
     'users',
     'core',
+
+    # api communication
+    'corsheaders',
     
     # DJOSER DRF AUTH
     'djoser',
 ]
 
 MIDDLEWARE = [
+  # api communication 
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

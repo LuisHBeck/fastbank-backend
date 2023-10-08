@@ -11,7 +11,7 @@ class NaturalPerson(models.Model):
 	name = models.CharField(max_length=50)
 	birth_date = models.DateField()
 	cpf = models.CharField(max_length=11)
-	rg = models.CharField(max_length=8)
+	rg = models.CharField(max_length=9)
 	social_name = models.CharField(max_length=50)
 
 	class Meta:
