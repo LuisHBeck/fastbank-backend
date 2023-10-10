@@ -8,14 +8,11 @@ from .views import(
     EmailViewSet,
     PhoneViewSet,
     AccountViewSet,
-    CreateAccountViewSet,
     InvestmentViewSet,
     AccountInvestmentViewSet,
     LoanViewSet,
-    CreateLoanViewSet,
     InstallmentViewSet,
     CardViewSet,
-    CreateCardViewSet,
     CardTransactionViewSet,
     PixViewSet
 )
@@ -27,14 +24,11 @@ router.register('addresses', AddressViewSet, basename='addresses')
 router.register('emails', EmailViewSet, basename='emails')
 router.register('phones', PhoneViewSet, basename='phones')
 router.register('accounts', AccountViewSet, basename='accounts')
-router.register('accounts-new', CreateAccountViewSet, basename='create-account')
 router.register('investments', InvestmentViewSet, basename='investments')
-router.register('investments/account/new', AccountInvestmentViewSet, basename='account-investments')
-router.register('loans', LoanViewSet)
-router.register('loans-new', CreateLoanViewSet, basename='create-loan')
-router.register('installments', InstallmentViewSet)
-router.register('cards', CardViewSet)
-router.register('cards-new', CreateCardViewSet, basename='new-card')
+router.register('investments/account/new', AccountInvestmentViewSet, basename='account-investments') # REVIEW
+router.register('loans', LoanViewSet, basename='loans')
+router.register('installments', InstallmentViewSet, basename='loans')
+router.register('cards', CardViewSet, basename='loans')
 router.register('card-transactions', CardTransactionViewSet, basename='cards-transactions')
 router.register('pix', PixViewSet, basename='pix')
 

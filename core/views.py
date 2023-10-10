@@ -30,14 +30,14 @@ from .serializers import (
 	PhoneSerializer,
     AccountSerializer,
     AccountPatchSerializer,
-    AccountRequestSerializer,
+    CreateAccountSerializer,
     InvestmentSerializer,
     AccountInvestmentSerializer,
     LoanSerializer,
     CreateLoanSerializer,
     InstallmentSerializer,
     CardSerializer,
-    CardRequestSerializer,
+    CreateCardSerializer,
     CardTransactionSerializer,
     StatementSerializer
 )
@@ -125,15 +125,10 @@ class AccountViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.request.method == 'PATCH':
             return AccountPatchSerializer
+        elif self.request.method == 'POST':
+            return CreateAccountSerializer
         return AccountSerializer
-
-
-class CreateAccountViewSet(viewsets.GenericViewSet):
-    permission_classes = [
-        NormalUserPost
-    ]
-    serializer_class = AccountRequestSerializer
-
+    
     def create(self, request):
         last_account = Account.objects.order_by('-number').first()
         if last_account:
@@ -189,11 +184,14 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
     
 #LOAN VIEW
 class LoanViewSet(viewsets.ModelViewSet):
-    queryset = Loan.objects.all()
-    serializer_class = LoanSerializer
     permission_classes = [
         NormalUserGetPost
     ]
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CreateLoanSerializer
+        return LoanSerializer
 
     def get_queryset(self):
         queryset = Loan.objects.all()
@@ -202,14 +200,7 @@ class LoanViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(id_account=account)
             return queryset
         return []
-
-
-class CreateLoanViewSet(viewsets.GenericViewSet):
-    permission_classes = [
-        NormalUserGetPost
-    ]
-    serializer_class = CreateLoanSerializer
-
+    
     def create(self, request):
         request_date = datetime.now()
         interest_rate = 15
@@ -280,17 +271,14 @@ class InstallmentViewSet(viewsets.ModelViewSet):
 #CARD VIEW
 class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
-    serializer_class = CardSerializer
     permission_classes = [
         NormalUserGetPostPatch
     ]
 
-
-class CreateCardViewSet(viewsets.GenericViewSet):
-    permission_classes = [
-        NormalUserPost
-    ]
-    serializer_class = CardRequestSerializer
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return CreateCardSerializer
+        return CardSerializer
 
     def create(self, request):
         size = 12

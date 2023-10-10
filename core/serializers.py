@@ -109,7 +109,7 @@ class AccountSerializer(serializers.ModelSerializer):
         ]
         
         
-class AccountRequestSerializer(serializers.ModelSerializer):
+class CreateAccountSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Account
@@ -205,7 +205,7 @@ class CardSerializer(serializers.ModelSerializer):
 		]
 
 
-class CardRequestSerializer(serializers.ModelSerializer):
+class CreateCardSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Card
