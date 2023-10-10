@@ -205,8 +205,8 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
         id_account = request.data.get('id_account')
         account = get_object_or_404(Account, pk=id_account)
         rate_amount = amount_request * (interest_rate/100) 
-        final_amout = amount_request + rate_amount
-        installment_amount_value = final_amout / installment_amount
+        final_amount = amount_request + rate_amount
+        installment_amount_value = final_amount / installment_amount
 
         if account.credit_limit >= (amount_request/3):
             loan = Loan.objects.create(
@@ -230,7 +230,7 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
 
             account.balance += Decimal(amount_request)
             account.save()
-            return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
+            return Response({'Request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
         else:
             loan = Loan.objects.create(
                 id_account = account,
@@ -282,7 +282,7 @@ class CreateCardViewSet(viewsets.GenericViewSet):
             id_account=account,
             number=number,
             expiration_date=expiration_date,
-            flag="Mastercad",
+            flag="Mastercard",
             verification_code=cv,
             is_active=True,
         )
