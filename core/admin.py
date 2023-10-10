@@ -13,6 +13,7 @@ from .models import (
 	Installment,
 	Card,
 	CardTransaction,
+	Statement
 )
 
 @admin.register(NaturalPerson)
@@ -167,5 +168,16 @@ class CardTransactionAdmin(admin.ModelAdmin):
         'timestamp',
         'operation',
 		'amount',
+	]
+	ordering = ['id']
+
+
+@admin.register(Statement)
+class StatementAdmin(admin.ModelAdmin):
+	list_display = [
+		'id_account',
+		'transaction_type',
+		'amount',
+		'balance',
 	]
 	ordering = ['id']

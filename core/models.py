@@ -239,3 +239,21 @@ class CardTransaction(Base):
 
 	def __str__(self):
 		return f'{self.type}' 
+	
+
+class Statement(Base):
+	"""
+		Bank Statement Model
+	"""
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+	transaction_type = models.CharField(max_length=15)
+	amount = models.DecimalField(decimal_places=2, max_digits=7)
+	balance = models.DecimalField(decimal_places=2, max_digits=7)
+
+	class Meta:
+		verbose_name = "Statement"
+		verbose_name_plural = "Statements"
+
+	def __str__(self) -> str:
+		return f'{self.id_account} {self.transaction_type} {self.amount}'
+	

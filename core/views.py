@@ -19,6 +19,7 @@ from .models import (
     Installment,
     Card,
     CardTransaction,
+    Statement
 )
 
 from .serializers import (
@@ -230,6 +231,14 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
 
             account.balance += Decimal(amount_request)
             account.save()
+
+            statement = Statement.objects.create(
+                id_account = account,
+                transaction_type = '+',
+                amount = amount_request,
+                balance = account.balance
+            )  
+
             return Response({'Request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
         else:
             loan = Loan.objects.create(
@@ -316,6 +325,14 @@ class CardTransactionViewSet(viewsets.GenericViewSet):
             )
             account.balance -= Decimal(amount)
             account.save()
+
+            statement = Statement.objects.create(
+                id_account = account,
+                transaction_type = '-',
+                amount = amount,
+                balance = account.balance
+            )  
+
             return Response({'Success': 'Successfully created'}, status=status.HTTP_201_CREATED)
         
         return Response({'Fail': 'Insufficient bunds'}, status=status.HTTP_201_CREATED)
