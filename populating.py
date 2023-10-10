@@ -243,6 +243,7 @@ def main():
 	print(create_account_investment(headers_1, 2,2))
 
 	print(create_loan(headers_1, 1, 1459.25, 4, "personal use"))
+	print(create_loan(headers_2, 2, 150.25, 2, "personal use"))
 
 	print(create_card(headers_1, 1))
 

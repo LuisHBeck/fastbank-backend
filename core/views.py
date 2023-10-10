@@ -171,14 +171,20 @@ class InvestmentViewSet(viewsets.ModelViewSet):
 
 #ACCOUNT INVESTMENT VIEW
 class AccountInvestmentViewSet(viewsets.ModelViewSet):
+    # queryset = AccountInvestments.objects.all()
     serializer_class = AccountInvestmentSerializer
     permission_classes = [
-        NormalUserPost
+        NormalUserGetPost
     ]
 
     def get_queryset(self):
-        account = self.kwargs['account']
-        return AccountInvestments.objects.filter(id_account=account)
+        queryset = AccountInvestments.objects.all()
+        account = self.request.query_params.get('account')
+        if account:
+            queryset = queryset.filter(id_account=account)
+            return queryset
+        return []
+    
     
     
 #LOAN VIEW
@@ -186,8 +192,16 @@ class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
     permission_classes = [
-        NormalUserGetPostPatch
+        NormalUserGetPost
     ]
+
+    def get_queryset(self):
+        queryset = Loan.objects.all()
+        account = self.request.query_params.get('account')
+        if account:
+            queryset = queryset.filter(id_account=account)
+            return queryset
+        return []
 
 
 class CreateLoanViewSet(viewsets.GenericViewSet):
@@ -241,18 +255,17 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
             )  
 
             return Response({'Request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
-        else:
-            loan = Loan.objects.create(
-                id_account = account,
-                request_date = request_date,
-                amount_request = amount_request,
-                interest_rate = interest_rate,
-                installment_amount = installment_amount,
-                is_approved = False,
-                observation = 'Not approved! Amount requested exceeds your credit limit by more than 3 times'
-            )
-            return Response({'Request': 'Not approved! Amount requested exceeds your credit limit by more than 3 times'}, status=status.HTTP_201_CREATED)
-
+        
+        loan = Loan.objects.create(
+            id_account = account,
+            request_date = request_date,
+            amount_request = amount_request,
+            interest_rate = interest_rate,
+            installment_amount = installment_amount,
+            is_approved = False,
+            observation = 'Not approved! Amount requested exceeds your credit limit by more than 3 times'
+        )
+        return Response({'Request': 'Not approved! Amount requested exceeds your credit limit by more than 3 times'}, status=status.HTTP_201_CREATED)
 
 
 #INSTALLMENT VIEW
