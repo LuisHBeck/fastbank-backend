@@ -14,7 +14,8 @@ from .models import (
 	Loan,
 	Installment,
 	Card,
-	CardTransaction
+	CardTransaction,
+    Statement
 )
 
 class UserSerializer(serializers.ModelSerializer):
@@ -224,3 +225,29 @@ class CardTransactionSerializer(serializers.ModelSerializer):
             'operation',
             'amount'
 		]
+
+
+class StatementSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Statement
+        fields = [
+            'id_account',
+            'transaction_type',
+            'amount',
+            'balance'
+        ]
+
+
+class PixSerializer(serializers.ModelSerializer):
+
+    id_receiver_account = serializers.IntegerField()
+    amount = serializers.DecimalField(decimal_places=2, max_digits=7)
+
+    class Meta: 
+        model = Account
+        fields = [
+            'id_account',
+            'id_receiver_account',
+            'amount'
+        ]

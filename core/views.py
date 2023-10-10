@@ -39,6 +39,7 @@ from .serializers import (
     CardSerializer,
     CardRequestSerializer,
     CardTransactionSerializer,
+    StatementSerializer
 )
 
 from .permissions import (
@@ -336,3 +337,40 @@ class CardTransactionViewSet(viewsets.GenericViewSet):
             return Response({'Success': 'Successfully created'}, status=status.HTTP_201_CREATED)
         
         return Response({'Fail': 'Insufficient bunds'}, status=status.HTTP_201_CREATED)
+    
+
+class PixViewSet(viewsets.GenericViewSet):
+    serializer_class = StatementSerializer
+    permission_classes = [
+        NormalUserGetPost
+    ]
+
+    def create(self, request):
+        id_payer_acount = request.data.get('id_account')
+        id_receiver_account = request.data.get('id_receiver_account')
+        amount = request.data.get('amount')
+
+        payer_account = get_object_or_404(Account, pk=id_payer_acount)
+        receiver_account = get_object_or_404(Account, pk=id_receiver_account)
+
+        if payer_account.balance >= amount:
+            payer_account.balance -= amount
+            payer_account.save()
+            receiver_account.balance += amount
+            receiver_account.save()
+
+            payer_statement = Statement.objects.create(
+                id_account = payer_account,
+                transaction_type = '-',
+                amount = amount,
+                balance = payer_account.balance
+            ) 
+
+            receiver_statement = Statement.objects.create(
+                id_account = receiver_account,
+                transaction_type = '+',
+                amount = amount,
+                balance = receiver_account.balance
+            ) 
+            return Response({'Success': 'Successfully transferred'}, status=status.HTTP_201_CREATED)
+        return Response({'Failed': 'Insufficient founds'}, status=status.HTTP_201_CREATED)
