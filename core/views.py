@@ -208,29 +208,40 @@ class CreateLoanViewSet(viewsets.GenericViewSet):
         final_amout = amount_request + rate_amount
         installment_amount_value = final_amout / installment_amount
 
-        loan = Loan.objects.create(
-            id_account = account,
-            request_date = request_date,
-            amount_request = amount_request,
-            interest_rate = interest_rate,
-            is_approved = is_approved,
-            approval_date = approval_date,
-            installment_amount = installment_amount,
-            observation = observation
-        )
-
-        for installment in range(installment_amount):
-            installment_ = Installment.objects.create(
-                id_loan = get_object_or_404(Loan, pk=1),
-                number = installment + 1,
-                expiration_date = request_date + timedelta(days=(30 * installment)),
-                payment_amount = installment_amount_value
+        if account.credit_limit >= (amount_request/3):
+            loan = Loan.objects.create(
+                id_account = account,
+                request_date = request_date,
+                amount_request = amount_request,
+                interest_rate = interest_rate,
+                is_approved = is_approved,
+                approval_date = approval_date,
+                installment_amount = installment_amount,
+                observation = observation
             )
 
-        account.balance += Decimal(amount_request)
-        account.save()
+            for installment in range(installment_amount):
+                installment_ = Installment.objects.create(
+                    id_loan = get_object_or_404(Loan, pk=1),
+                    number = installment + 1,
+                    expiration_date = request_date + timedelta(days=(30 * installment)),
+                    payment_amount = installment_amount_value
+                )
 
-        return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
+            account.balance += Decimal(amount_request)
+            account.save()
+            return Response({'Request': f'Ammount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
+        else:
+            loan = Loan.objects.create(
+                id_account = account,
+                request_date = request_date,
+                amount_request = amount_request,
+                interest_rate = interest_rate,
+                installment_amount = installment_amount,
+                is_approved = False,
+                observation = 'Not approved! Amount requested exceeds your credit limit by more than 3 times'
+            )
+            return Response({'Request': 'Not approved! Amount requested exceeds your credit limit by more than 3 times'}, status=status.HTTP_201_CREATED)
 
 
 
