@@ -21,19 +21,18 @@
 
 * ## Executing the project
   Setup the virtual environment
-    - ```ps
-        py -m venv .venv
-        .venv\Scripts\activate
-        pip install -r requirements.txt
-      ```
+  ```ps
+      py -m venv .venv
+      .venv\Scripts\activate
+      pip install -r requirements.txt
+  ```
   Run the server and populate
-    - ```ps
-      py populating.py
-      ```
-      This command does everything you need to prepare the django environment
-        - Execute: 
-          * makemigrations
-          * migrate
-          * runserver
-          * create superuser
-          * database population
+  ```ps
+    py populating.py
+  ```
+      This command does everything you need to prepare the django environment: 
+        - makemigrations
+        - migrate
+        - runserver
+        - create superuser
+        - database population
