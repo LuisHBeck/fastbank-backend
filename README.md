@@ -20,13 +20,13 @@
   * Insomnia
 
 * ## Executing the project
-  * Setup the virtual environment
+  Setup the virtual environment
     - ```ps
         py -m venv .venv
         .venv\Scripts\activate
         pip install -r requirements.txt
       ```
-  * Run the server and populate
+  Run the server and populate
     - ```ps
       py populating.py
       ```
