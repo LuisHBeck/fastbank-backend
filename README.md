@@ -1,9 +1,9 @@
 # FAST-BANK BACKEND
 
-* ## Project Description 🌐
+## Project Description 🌐
   RESTFUL API for a digital bank, demonstrating knowledge in backend development, HTTP protocols, authentication and authorization, REST design, MVC architecture and application of business rules
 
-* ## Main Requirements 
+## Main Requirements 
   * Endpoints protected by JWT authentication;
   * Creating new users and accounts (Natural and Legal);
   * Apply for card and loans upon approval;
@@ -12,14 +12,14 @@
   * Allow installments payment; 
   * Transaction history;
 
-* ## Used Technologies 💻📚
+## Used Technologies 💻📚
   * Python 🐍
   * Django
     - Django REST Framework
     - Jazzmin
   * Insomnia
 
-* ## Executing the project
+## Executing the project
   Setup the virtual environment
   ```ps
   py -m venv .venv
@@ -37,215 +37,304 @@
     - create superuser
     - database population
 
-* ## ENDPOINTS 🏁
-  ### USERS
-
-    ```ps
-    /api/v1/auth/users/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "register_number": <int>,
-      "picture": "<str>",
-      "password": "<str>"
-    }
-    ```
-
-  ### JWT
-
-    ```ps
-    /api/v1/auth/jwt/create/
-    ```
-
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "register_number": <int>,
-      "password": "<str>"
-    }
-    ```
-    You need the {"access": token}
-
-  ### NATURAL PEOPLE
-    ```ps
-    /api/v1/natural-people/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "user": <user_RN_fk>,
-      "name": "<str>",
-      "birth_date": "<yyyy-mm-dd>",
-      "cpf": "<str>",
-      "rg": "<str>",
-      "social_name": "<str>"
-    }
-    ```
-
-  ### LEGAL PEOPLE
-    ```ps
-    /api/v1/legal-people/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "user": <user_RN_fk>,
-      "fantasy_name": "<str>",
-      "establishment_date": "<yyyy-mm-dd>",
-      "cnpj": "<str>",
-      "municipal_registration": "<str>",
-      "state_registration": "<str>",
-      "legal_nature": "<str>"
-    }
-    ```
-
-  ### ADDRESSES
-    ```ps
-    /api/v1/addresses/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "user": <user_RN_fk>,
-      "street": "<str>",
-      "number": "<str>",
-      "neighborhood": "<str>",
-      "city": "<str>",
-      "state": "<str>",
-      "cep": "<str>"
-    }
-    ```
-
-  ### EMAILS
-    ```ps
-    /api/v1/emails/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "user": <user_RN_fk>,
-      "email": "<email>"
-    }
-    ```
-
-  ### PHONES
-    ```ps
-    /api/v1/phones/
-    ```
-    ```` POST METHOD ````
-
-    ```json
-    {
-      "user": <user_RN_fk>,
-      "area_code": "<str>",
-      "prefix_number": "<str>",
-      "phone_number": "<str>"
-    }
-    ```
-
-  ### ACCOUNTS
+## ENDPOINTS 🏁
+  If endpoint has ```authorization=True``` use {"Authorization": "Bearer <jwt_access>"}
+### USERS
+  ``` authorization=False ```
   ```ps
-  /api/v1/accounts/
+  /api/v1/auth/users/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "type": "<str>"
+    "register_number": <int>,
+    "picture": "<str>",
+    "password": "<str>"
   }
   ```
 
-  ### INVESTMENTS
+### JWT
+``` authorization=False ```
   ```ps
-  /api/v1/investments/
+  /api/v1/auth/jwt/create/
+  ```
+
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "register_number": <int>,
+    "password": "<str>"
+  }
+  ```
+  ``` RETRUN EXAMPLE ```
+  ```json
+  {
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+  }
+  ```
+  You need the {"access": "jwt"}
+
+### NATURAL PEOPLE
+``` authorization=True ```
+  ```ps
+  /api/v1/natural-people/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "type": "<str>",
-    "contribution": <float>,
-    "admin_fee": <float>,
-    "period": "<yyyy-mm-dd>", 
-    "risc_rate": <float>,
-    "profitability": <float>,
-    "is_active": <boolean>
+    "user": <user_RN_fk>,
+    "name": "<str>",
+    "birth_date": "<yyyy-mm-dd>",
+    "cpf": "<str>",
+    "rg": "<str>",
+    "social_name": "<str>"
   }
   ```
 
-  ### ACCOUNTS INVESTMENTS
+### LEGAL PEOPLE
+``` authorization=True ```
   ```ps
-  /api/v1/investments/account/new/
+  /api/v1/legal-people/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "id_account": <account_fk>,
-    "id_investment": <investment_fk>
+    "user": <user_RN_fk>,
+    "fantasy_name": "<str>",
+    "establishment_date": "<yyyy-mm-dd>",
+    "cnpj": "<str>",
+    "municipal_registration": "<str>",
+    "state_registration": "<str>",
+    "legal_nature": "<str>"
   }
   ```
 
-  ### CARDS
+### ADDRESSES
+``` authorization=True ```
   ```ps
-  /api/v1/cards/
+  /api/v1/addresses/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "id_account": <account_fk>,
+    "user": <user_RN_fk>,
+    "street": "<str>",
+    "number": "<str>",
+    "neighborhood": "<str>",
+    "city": "<str>",
+    "state": "<str>",
+    "cep": "<str>"
   }
   ```
 
-  ### CARDS TRANSACTIONS
+### EMAILS
+``` authorization=True ```
   ```ps
-  /api/v1/card-transactions/
+  /api/v1/emails/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "id_account": <account_fk>,
-    "id_card": <card_fk>,
-    "operation": <str>,
-    "amount": <float>
+    "user": <user_RN_fk>,
+    "email": "<email>"
   }
   ```
-  
-  ### LOANS
+
+### PHONES
+``` authorization=True ```
   ```ps
-  /api/v1/loans/
+  /api/v1/phones/
   ```
   ```` POST METHOD ````
 
   ```json
   {
-    "id_account": <account_fk>,
-    "amount_request": <float>,
-    "installment_amount": <int>,
-    "observation": <str>
+    "user": <user_RN_fk>,
+    "area_code": "<str>",
+    "prefix_number": "<str>",
+    "phone_number": "<str>"
   }
   ```
 
-  ### PIX
-  ```ps
-  /api/v1/pix/
-  ```
-  ```` POST METHOD ````
+### ACCOUNTS
+``` authorization=True ```
+```ps
+/api/v1/accounts/
+```
+```` POST METHOD ````
 
-  ```json
-  {
-    "id_account": <account_fk>,
-    "id_receiver_account": <account_fk>
-    "amount": <float> 
-  }
+```json
+{
+  "type": "<str>"
+}
+```
+The value for "type" needs to be "Savings" or "Current"
+
+```` GET METHOD ````
+```json
+{
+    "user": [
+      654321
+    ],
+    "agency": 1,
+    "number": 1112,
+    "type": "Current",
+    "balance": "275.25",
+    "credit_limit": "500.00",
+    "is_active": true
+}
+```
+
+
+### INVESTMENTS
+``` authorization=True ```
+```ps
+/api/v1/investments/
+```
+```` POST METHOD ````
+
+```json
+{
+  "type": "<str>",
+  "contribution": <float>,
+  "admin_fee": <float>,
+  "period": "<yyyy-mm-dd>", 
+  "risc_rate": <float>,
+  "profitability": <float>,
+  "is_active": <boolean>
+}
+```
+
+```` GET METHOD ````
+```json
+{
+  "type": "LCA",
+  "contribution": "135.25",
+  "admin_fee": "1.50",
+  "period": "2030-12-11",
+  "risc_rate": "2.30",
+  "profitability": "15.60",
+  "is_active": true
+}
+```
+
+### ACCOUNTS INVESTMENTS
+``` authorization=True ```
+```ps
+/api/v1/investments/account/new/
+```
+```` POST METHOD ````
+
+```json
+{
+  "id_account": <account_fk>,
+  "id_investment": <investment_fk>
+}
+```
+
+```` GET METHOD ```` 
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id_account": 1111,
+  "id_investment": 1
+}
+```
+
+### CARDS
+``` authorization=True ```
+```ps
+/api/v1/cards/
+```
+```` POST METHOD ````
+
+```json
+{
+  "id_account": <account_fk>,
+}
+```
+
+
+```` GET METHOD ```` 
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id_account": 1111,
+  "number": "570054397143",
+  "expiration_date": "2027-06-22",
+  "flag": "Mastercard",
+  "verification_code": "843",
+  "is_active": true
+}
+```
+
+### CARDS TRANSACTIONS
+``` authorization=True ```
+```ps
+/api/v1/card-transactions/
+```
+```` POST METHOD ````
+
+```json
+{
+  "id_account": <account_fk>,
+  "id_card": <card_fk>,
+  "operation": <str>,
+  "amount": <float>
+}
+```
+
+### LOANS
+``` authorization=True ```
+```ps
+/api/v1/loans/
+```
+```` POST METHOD ````
+
+```json
+{
+  "id_account": <account_fk>,
+  "amount_request": <float>,
+  "installment_amount": <int>,
+  "observation": <str>
+}
+```
+
+```` GET METHOD ```` 
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id_account": 1111,
+  "request_date": "2023-10-11",
+  "amount_request": "1459.25",
+  "interest_rate": "15.00",
+  "installment_amount": 4,
+  "observation": "personal use"
+}
+```
+
+### PIX
+``` authorization=True ```
+```ps
+/api/v1/pix/
+```
+```` POST METHOD ````
+
+```json
+{
+  "id_account": <account_fk>,
+  "id_receiver_account": <account_fk>
+  "amount": <float> 
+}
 
 
