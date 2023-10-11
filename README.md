@@ -150,4 +150,102 @@
     }
     ```
 
+  ### ACCOUNTS
+  ```ps
+  /api/v1/accounts/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "type": "<str>"
+  }
+  ```
+
+  ### INVESTMENTS
+  ```ps
+  /api/v1/investments/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "type": "<str>",
+    "contribution": <float>,
+    "admin_fee": <float>,
+    "period": "<yyyy-mm-dd>", 
+    "risc_rate": <float>,
+    "profitability": <float>,
+    "is_active": <boolean>
+  }
+  ```
+
+  ### ACCOUNTS INVESTMENTS
+  ```ps
+  /api/v1/investments/account/new/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "id_account": <account_fk>,
+    "id_investment": <investment_fk>
+  }
+  ```
+
+  ### CARDS
+  ```ps
+  /api/v1/cards/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "id_account": <account_fk>,
+  }
+  ```
+
+  ### CARDS TRANSACTIONS
+  ```ps
+  /api/v1/card-transactions/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "id_account": <account_fk>,
+    "id_card": <card_fk>,
+    "operation": <str>,
+    "amount": <float>
+  }
+  ```
+  
+  ### LOANS
+  ```ps
+  /api/v1/loans/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "id_account": <account_fk>,
+    "amount_request": <float>,
+    "installment_amount": <int>,
+    "observation": <str>
+  }
+  ```
+
+  ### PIX
+  ```ps
+  /api/v1/pix/
+  ```
+  ```` POST METHOD ````
+
+  ```json
+  {
+    "id_account": <account_fk>,
+    "id_receiver_account": <account_fk>
+    "amount": <float> 
+  }
+
 
