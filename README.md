@@ -36,3 +36,17 @@
     - runserver
     - create superuser
     - database population
+
+* ## ENDPOINTS 🏁
+  * USERS
+    ```ps
+      api/v1/auth/users/
+    ```
+    ````POST````
+    ```
+      {
+        "register_number": <int>,
+        "picture": <str>,
+        "password": <str>
+      }
+    ```
