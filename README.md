@@ -68,3 +68,86 @@
     }
     ```
     You need the {"access": token}
+
+  ### NATURAL PEOPLE
+    ```ps
+    /api/v1/natural-people/
+    ```
+    ```` POST METHOD ````
+
+    ```
+    {
+      "user": <user_RN_fk>,
+			"name": <str>,
+			"birth_date": <yyyy-mm-dd>,
+			"cpf": <str>,
+			"rg": <str>,
+			"social_name": <str>
+    }
+    ```
+
+  ### LEGAL PEOPLE
+    ```ps
+    /api/v1/legal-people/
+    ```
+    ```` POST METHOD ````
+
+    ```
+    {
+      "user": <user_RN_fk>,
+			"fantasy_name": <str>,
+			"establishment_date": <yyyy-mm-dd>,
+			"cnpj": <str>,
+			"municipal_registration": <str>,
+			"state_registration": <str>,
+			"legal_nature": <str>
+    }
+    ```
+
+  ### ADDRESSES
+    ```ps
+    /api/v1/addresses/
+    ```
+    ```` POST METHOD ````
+
+    ```
+    {
+      "user": <user_RN_fk>,
+      "street": <str>,
+      "number": <str>,
+      "neighborhood": <str>,
+      "city": <str>,
+      "state": <str>,
+      "cep": <str>
+    }
+    ```
+
+  ### EMAILS
+    ```ps
+    /api/v1/emails/
+    ```
+    ```` POST METHOD ````
+
+    ```
+    {
+      "user": <user_RN_fk>,
+      "email": <email>
+    }
+    ```
+
+  ### PHONES
+    ```ps
+    /api/v1/phones/
+    ```
+    ```` POST METHOD ````
+
+    ```
+    {
+      "user": <user_RN_fk>,
+      "area_code": <str>,
+      "prefix_number": <str>,
+      "phone_number": <str>
+    }
+    ```
+
+
