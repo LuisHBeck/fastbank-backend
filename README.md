@@ -78,11 +78,11 @@
     ```
     {
       "user": <user_RN_fk>,
-			"name": <str>,
-			"birth_date": <yyyy-mm-dd>,
-			"cpf": <str>,
-			"rg": <str>,
-			"social_name": <str>
+      "name": <str>,
+      "birth_date": <yyyy-mm-dd>,
+      "cpf": <str>,
+      "rg": <str>,
+      "social_name": <str>
     }
     ```
 
@@ -95,12 +95,12 @@
     ```
     {
       "user": <user_RN_fk>,
-			"fantasy_name": <str>,
-			"establishment_date": <yyyy-mm-dd>,
-			"cnpj": <str>,
-			"municipal_registration": <str>,
-			"state_registration": <str>,
-			"legal_nature": <str>
+      "fantasy_name": <str>,
+      "establishment_date": <yyyy-mm-dd>,
+      "cnpj": <str>,
+      "municipal_registration": <str>,
+      "state_registration": <str>,
+      "legal_nature": <str>
     }
     ```
 
