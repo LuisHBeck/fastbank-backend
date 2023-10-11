@@ -45,7 +45,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "register_number": <int>,
       "picture": <str>,
@@ -61,7 +61,7 @@
 
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "register_number": <int>,
       "password": <str>
@@ -75,7 +75,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "user": <user_RN_fk>,
       "name": <str>,
@@ -92,7 +92,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "user": <user_RN_fk>,
       "fantasy_name": <str>,
@@ -110,7 +110,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "user": <user_RN_fk>,
       "street": <str>,
@@ -128,7 +128,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "user": <user_RN_fk>,
       "email": <email>
@@ -141,7 +141,7 @@
     ```
     ```` POST METHOD ````
 
-    ```
+    ```json
     {
       "user": <user_RN_fk>,
       "area_code": <str>,
