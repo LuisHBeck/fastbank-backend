@@ -43,28 +43,28 @@
     ```ps
     /api/v1/auth/users/
     ```
-    - ```` POST METHOD ````
+    ```` POST METHOD ````
 
-      ```
-      {
-        "register_number": <int>,
-        "picture": <str>,
-        "password": <str>
-      }
-      ```
+    ```
+    {
+      "register_number": <int>,
+      "picture": <str>,
+      "password": <str>
+    }
+    ```
 
-  * JWT
+  ### JWT
 
     ```ps
     /api/v1/auth/jwt/create/
     ```
 
-    - ```` POST METHOD ````
+    ```` POST METHOD ````
 
-      ```
-      {
-        "register_number": <int>,
-        "password": <str>
-      }
-      ```
-      You need the {"access": token}
+    ```
+    {
+      "register_number": <int>,
+      "password": <str>
+    }
+    ```
+    You need the {"access": token}
