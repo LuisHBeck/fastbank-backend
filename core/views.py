@@ -65,6 +65,7 @@ class NaturalPersonViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return filtering_by_user(NaturalPerson, user)
     
+    
 #LEGAL PERSON VIEW
 class LegalPersonViewSet(viewsets.ModelViewSet):
     queryset = LegalPerson.objects.all()
@@ -77,6 +78,7 @@ class LegalPersonViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return filtering_by_user(LegalPerson, user)
     
+    
 #ADDRESS VIEW
 class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
@@ -87,6 +89,7 @@ class AddressViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         user = self.request.user
         return filtering_by_user(Address, user)
+    
     
 #EMAIL VIEW
 class EmailViewSet(viewsets.ModelViewSet):
@@ -179,8 +182,7 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
             return queryset
         return []
     
-    
-    
+
 #LOAN VIEW
 class LoanViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -228,7 +230,7 @@ class LoanViewSet(viewsets.ModelViewSet):
 
             for installment in range(installment_amount):
                 installment_ = Installment.objects.create(
-                    id_loan = get_object_or_404(Loan, pk=1),
+                    id_loan = get_object_or_404(Loan, pk=loan.pk),
                     number = installment + 1,
                     expiration_date = request_date + timedelta(days=(30 * installment)),
                     payment_amount = installment_amount_value
@@ -264,6 +266,24 @@ class InstallmentViewSet(viewsets.ModelViewSet):
     permission_classes = [
         NormalUserGetPostPatch
     ]
+
+    def partial_update(self, request, *args, **kwargs):
+        installment = self.get_object()
+        loan = installment.id_loan
+        account = loan.id_account
+        if account.balance >= installment.payment_amount:
+            account.balance -= installment.payment_amount
+            account.save()
+            installment.paid = True 
+            installment.save()
+            statement = Statement.objects.create(
+                id_account = account,
+                transaction_type = '-',
+                amount = installment.payment_amount,
+                balance = account.balance
+            )  
+            return Response({'Successfully paid': 'success'}, status=status.HTTP_202_ACCEPTED)
+
     
 
 #CARD VIEW

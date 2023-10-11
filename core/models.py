@@ -195,6 +195,7 @@ class Installment(Base):
 	expiration_date = models.DateField()
 	payment_date = models.DateField(blank=True, null=True)
 	payment_amount = models.DecimalField(decimal_places=2, max_digits=7)
+	paid = models.BooleanField(default=False)
 
 	class Meta:
 		verbose_name = 'installment'

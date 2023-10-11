@@ -140,6 +140,7 @@ class InstallmentAdmin(admin.ModelAdmin):
 		'expiration_date',
 		'payment_date',
 		'payment_amount',
+		'paid'
 	]
 	ordering = ['id']
 
