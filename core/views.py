@@ -285,7 +285,6 @@ class InstallmentViewSet(viewsets.ModelViewSet):
             return Response({'Successfully paid': 'success'}, status=status.HTTP_202_ACCEPTED)
 
     
-
 #CARD VIEW
 class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
@@ -354,7 +353,7 @@ class CardTransactionViewSet(viewsets.GenericViewSet):
             return Response({'Success': 'Successfully created'}, status=status.HTTP_201_CREATED)
         return Response({'Fail': 'Insufficient bunds'}, status=status.HTTP_201_CREATED)
     
-
+#PIX VIEWSET
 class PixViewSet(viewsets.GenericViewSet):
     serializer_class = StatementSerializer
     permission_classes = [
@@ -390,3 +389,18 @@ class PixViewSet(viewsets.GenericViewSet):
             ) 
             return Response({'Success': 'Successfully transferred'}, status=status.HTTP_201_CREATED)
         return Response({'Failed': 'Insufficient founds'}, status=status.HTTP_201_CREATED)
+    
+
+class StatementViewset(viewsets.ModelViewSet):
+    serializer_class = StatementSerializer
+    permission_classes = [
+        NormalUserGet
+    ]
+
+    def get_queryset(self):
+        queryset = Statement.objects.all()
+        account = self.request.query_params.get('account')
+        if account:
+            queryset = queryset.filter(id_account=account)
+            return queryset
+        return []
