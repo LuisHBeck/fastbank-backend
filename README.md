@@ -48,8 +48,8 @@
     ```json
     {
       "register_number": <int>,
-      "picture": <str>,
-      "password": <str>
+      "picture": "<str>",
+      "password": "<str>"
     }
     ```
 
@@ -64,7 +64,7 @@
     ```json
     {
       "register_number": <int>,
-      "password": <str>
+      "password": "<str>"
     }
     ```
     You need the {"access": token}
@@ -78,11 +78,11 @@
     ```json
     {
       "user": <user_RN_fk>,
-      "name": <str>,
-      "birth_date": <yyyy-mm-dd>,
-      "cpf": <str>,
-      "rg": <str>,
-      "social_name": <str>
+      "name": "<str>",
+      "birth_date": "<yyyy-mm-dd>",
+      "cpf": "<str>",
+      "rg": "<str>",
+      "social_name": "<str>"
     }
     ```
 
@@ -95,12 +95,12 @@
     ```json
     {
       "user": <user_RN_fk>,
-      "fantasy_name": <str>,
-      "establishment_date": <yyyy-mm-dd>,
-      "cnpj": <str>,
-      "municipal_registration": <str>,
-      "state_registration": <str>,
-      "legal_nature": <str>
+      "fantasy_name": "<str>",
+      "establishment_date": "<yyyy-mm-dd>",
+      "cnpj": "<str>",
+      "municipal_registration": "<str>",
+      "state_registration": "<str>",
+      "legal_nature": "<str>"
     }
     ```
 
@@ -113,12 +113,12 @@
     ```json
     {
       "user": <user_RN_fk>,
-      "street": <str>,
-      "number": <str>,
-      "neighborhood": <str>,
-      "city": <str>,
-      "state": <str>,
-      "cep": <str>
+      "street": "<str>",
+      "number": "<str>",
+      "neighborhood": "<str>",
+      "city": "<str>",
+      "state": "<str>",
+      "cep": "<str>"
     }
     ```
 
@@ -131,7 +131,7 @@
     ```json
     {
       "user": <user_RN_fk>,
-      "email": <email>
+      "email": "<email>"
     }
     ```
 
@@ -144,9 +144,9 @@
     ```json
     {
       "user": <user_RN_fk>,
-      "area_code": <str>,
-      "prefix_number": <str>,
-      "phone_number": <str>
+      "area_code": "<str>",
+      "prefix_number": "<str>",
+      "phone_number": "<str>"
     }
     ```
 
