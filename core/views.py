@@ -51,8 +51,7 @@ from .permissions import (
     NormalUserGetPostPatch
 )
 
-from .utils.filters import filtering_by_user
-from core import serializers
+from .utils.filters import filtering_by_user, filtering_by_account
 
 #NATURAL PERSON VIEW 
 class NaturalPersonViewSet(viewsets.ModelViewSet):
@@ -175,12 +174,8 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        queryset = AccountInvestments.objects.all()
         account = self.request.query_params.get('account')
-        if account:
-            queryset = queryset.filter(id_account=account)
-            return queryset
-        return []
+        return filtering_by_account(AccountInvestments, account)
     
 
 #LOAN VIEW
@@ -195,12 +190,8 @@ class LoanViewSet(viewsets.ModelViewSet):
         return LoanSerializer
 
     def get_queryset(self):
-        queryset = Loan.objects.all()
         account = self.request.query_params.get('account')
-        if account:
-            queryset = queryset.filter(id_account=account)
-            return queryset
-        return []
+        return filtering_by_account(Loan, account)
     
     def create(self, request):
         request_date = datetime.now()
@@ -398,9 +389,5 @@ class StatementViewset(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        queryset = Statement.objects.all()
         account = self.request.query_params.get('account')
-        if account:
-            queryset = queryset.filter(id_account=account)
-            return queryset
-        return []
+        return filtering_by_account(Statement, account)
