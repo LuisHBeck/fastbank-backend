@@ -39,10 +39,12 @@
 
 * ## ENDPOINTS 🏁
   * USERS
+  
     ```ps
-      api/v1/auth/users/
+    /api/v1/auth/users/
     ```
-    - ````POST````
+    - ```` POST METHOD ````
+
       ```
       {
         "register_number": <int>,
