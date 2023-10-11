@@ -38,8 +38,8 @@
     - database population
 
 * ## ENDPOINTS 🏁
-  * USERS
-  
+  ### USERS
+
     ```ps
     /api/v1/auth/users/
     ```
@@ -52,3 +52,19 @@
         "password": <str>
       }
       ```
+
+  * JWT
+
+    ```ps
+    /api/v1/auth/jwt/create/
+    ```
+
+    - ```` POST METHOD ````
+
+      ```
+      {
+        "register_number": <int>,
+        "password": <str>
+      }
+      ```
+      You need the {"access": token}
