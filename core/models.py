@@ -114,14 +114,13 @@ class Account(Base):
 		['Current', 'Current'],
 		['Savings', 'Savings'],
 	]
+	number = models.IntegerField(primary_key=True)
 	user = models.ManyToManyField(get_user_model())
 	agency = models.IntegerField()
-	number = models.IntegerField()
 	type = models.CharField(max_length=8, choices=ACCOUNT_TYPE_CHOICES)
 	balance = models.DecimalField(decimal_places=2, max_digits=7)
 	credit_limit = models.DecimalField(decimal_places=2, max_digits=7)
 	is_active = models.BooleanField(default=True)
-
 
 	class Meta:
 		verbose_name = 'account'

@@ -237,19 +237,19 @@ def main():
 	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
 	print(create_investment(super_user_header, 'BCT', 192.25, 3.5, '2030-12-11', 5.2, 29.6))
 
-	print(create_account_investment(headers_1, 1,1))
-	print(create_account_investment(headers_1, 1,2))
-	print(create_account_investment(headers_1, 2,1))
-	print(create_account_investment(headers_1, 2,2))
+	print(create_account_investment(headers_1, 1111,1))
+	print(create_account_investment(headers_1, 1111,2))
+	print(create_account_investment(headers_1, 1112,1))
+	print(create_account_investment(headers_1, 1112,2))
 
-	print(create_loan(headers_1, 1, 1459.25, 4, "personal use"))
-	print(create_loan(headers_2, 2, 150.25, 2, "personal use"))
+	print(create_loan(headers_1, 1111, 1459.25, 4, "personal use"))
+	print(create_loan(headers_2, 1112, 150.25, 2, "personal use"))
 
-	print(create_card(headers_1, 1))
+	print(create_card(headers_1, 1111))
 
-	print(create_card_transaction(headers_1, 1, 1, "Debit", 500))
+	print(create_card_transaction(headers_1, 1111, 1, "Debit", 500))
 
-	print(create_pix(headers_1, 1,2,125))
+	print(create_pix(headers_1, 1111,1112,125))
 
 	# server_process.join()
 

@@ -81,16 +81,14 @@ class PhoneAdmin(admin.ModelAdmin):
 @admin.register(Account)
 class AccountAdmin(admin.ModelAdmin):
 	list_display = [
-		'id',
-        # 'user',
-		'agency',
 		'number',
+		'agency',
         'type',
         'balance',
         'credit_limit',
         'is_active',
 	]
-	ordering = ['id']
+	ordering = ['number']
 
 
 @admin.register(Investment)

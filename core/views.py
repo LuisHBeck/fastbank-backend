@@ -151,7 +151,6 @@ class AccountViewSet(viewsets.ModelViewSet):
             credit_limit=credit_limit
         )
         account.user.add(user)
-        
         return Response({'Successfully created': f'Agency: {agency}, Number: {number}, Credit Limit: R${credit_limit}'}, status=status.HTTP_201_CREATED)
     
 
@@ -244,7 +243,6 @@ class LoanViewSet(viewsets.ModelViewSet):
                 amount = amount_request,
                 balance = account.balance
             )  
-
             return Response({'Request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
         
         loan = Loan.objects.create(
@@ -297,7 +295,6 @@ class CardViewSet(viewsets.ModelViewSet):
             verification_code=cv,
             is_active=True,
         )
-        
         return Response({'Successfully created': f'Number: {number}, Expiration: {expiration_date}, Verification Code: {cv}'}, status=status.HTTP_201_CREATED)
     
     
@@ -334,9 +331,7 @@ class CardTransactionViewSet(viewsets.GenericViewSet):
                 amount = amount,
                 balance = account.balance
             )  
-
             return Response({'Success': 'Successfully created'}, status=status.HTTP_201_CREATED)
-        
         return Response({'Fail': 'Insufficient bunds'}, status=status.HTTP_201_CREATED)
     
 
