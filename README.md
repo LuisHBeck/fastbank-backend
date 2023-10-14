@@ -16,6 +16,7 @@
   * Python 🐍
   * Django
     - Django REST Framework
+    - Djoser
     - Jazzmin
   * Insomnia
 
