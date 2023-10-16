@@ -198,6 +198,7 @@ class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = [
+            'id',
 			'id_account',
             'number',
             'expiration_date',
