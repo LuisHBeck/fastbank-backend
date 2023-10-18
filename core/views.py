@@ -272,7 +272,7 @@ class InstallmentViewSet(viewsets.ModelViewSet):
             value = 0
             for installment in queryset:
                 value += installment.payment_amount
-            return Response({'Final installment amount': value}, status=status.HTTP_200_OK) 
+            return Response({'installment_amount': value}, status=status.HTTP_200_OK) 
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
