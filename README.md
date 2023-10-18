@@ -250,6 +250,35 @@ For GET Method need to pass the query parameter "?account=<account_number>"
 }
 ```
 
+### INSTALLMENTS
+``` authorization=True ```
+
+```` GET METHOD ```` 
+
+GET all installments
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id": 1,
+  "id_account": 1111,
+  "number": "1",
+  "expiration_date": "2023-10-18",
+  "payment_date": null,
+  "payment_amount": "419.53",
+  "paid": false
+}
+```
+
+GET installment final amount
+
+For GET Method need to pass the query parameter "?account=<account_number>&final=true"
+```json
+{
+  "Installment final amount": 927.45
+}
+```
+
 ### CARDS
 ``` authorization=True ```
 ```ps
@@ -337,5 +366,3 @@ For GET Method need to pass the query parameter "?account=<account_number>"
   "id_receiver_account": <account_fk>
   "amount": <float> 
 }
-
-
