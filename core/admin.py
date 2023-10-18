@@ -135,7 +135,7 @@ class LoanAdmin(admin.ModelAdmin):
 class InstallmentAdmin(admin.ModelAdmin):
 	list_display = [
 		'id',
-        'id_loan',
+        'id_account',
 		'number',
 		'expiration_date',
 		'payment_date',

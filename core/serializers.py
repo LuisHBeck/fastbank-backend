@@ -184,7 +184,7 @@ class InstallmentSerializer(serializers.ModelSerializer):
         model = Installment
         fields = [
             'id',
-			'id_loan',
+			'id_account',
 			'number',
 			'expiration_date',
 			'payment_date',

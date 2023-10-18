@@ -221,7 +221,7 @@ class LoanViewSet(viewsets.ModelViewSet):
 
             for installment in range(installment_amount):
                 installment_ = Installment.objects.create(
-                    id_loan = get_object_or_404(Loan, pk=loan.pk),
+                    id_account = get_object_or_404(Account, pk=account.pk),
                     number = installment + 1,
                     expiration_date = request_date + timedelta(days=(30 * installment)),
                     payment_amount = installment_amount_value
@@ -252,12 +252,30 @@ class LoanViewSet(viewsets.ModelViewSet):
 
 #INSTALLMENT VIEW
 class InstallmentViewSet(viewsets.ModelViewSet):
-    queryset = Installment.objects.all()
+    # queryset = Installment.objects.all()
     serializer_class = InstallmentSerializer
     permission_classes = [
         NormalUserGetPostPatch
     ]
 
+    def get_queryset(self):
+        account = self.request.query_params.get('account')
+        queryset = filtering_by_account(Installment, account)
+        current_month = datetime.now().month
+        queryset = queryset.filter(expiration_date__month=current_month)
+        return queryset
+    
+    def list(self, request):
+        queryset = self.get_queryset()
+        final_value = self.request.query_params.get('final')
+        if final_value:
+            value = 0
+            for installment in queryset:
+                value += installment.payment_amount
+            return Response({'Final installment amount': value}, status=status.HTTP_200_OK) 
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
     def partial_update(self, request, *args, **kwargs):
         installment = self.get_object()
         loan = installment.id_loan

@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-from users.models import CustomUser
-
 class NaturalPerson(models.Model):
 	"""
         Natural Person model
@@ -190,7 +188,7 @@ class Installment(Base):
 	"""
       Installment model
     """
-	id_loan = models.ForeignKey(Loan, on_delete=models.CASCADE)
+	id_account = models.ForeignKey(Account, on_delete=models.CASCADE)
 	number = models.CharField(max_length=50)
 	expiration_date = models.DateField()
 	payment_date = models.DateField(blank=True, null=True)
