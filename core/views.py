@@ -174,8 +174,9 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
+        user = self.request.user
         account = self.request.query_params.get('account')
-        return filtering_by_account(AccountInvestments, account)
+        return filtering_by_account(AccountInvestments, account, user)
     
 
 #LOAN VIEW
@@ -190,8 +191,9 @@ class LoanViewSet(viewsets.ModelViewSet):
         return LoanSerializer
 
     def get_queryset(self):
+        user = self.request.user
         account = self.request.query_params.get('account')
-        return filtering_by_account(Loan, account)
+        return filtering_by_account(Loan, account, user)
     
     def create(self, request):
         request_date = datetime.now()
@@ -259,10 +261,12 @@ class InstallmentViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
+        user = self.request.user
         account = self.request.query_params.get('account')
-        queryset = filtering_by_account(Installment, account)
-        current_month = datetime.now().month
-        queryset = queryset.filter(expiration_date__month=current_month)
+        queryset = filtering_by_account(Installment, account, user)
+        if not isinstance(queryset, list):
+            current_month = datetime.now().month
+            queryset = queryset.filter(expiration_date__month=current_month)
         return queryset
     
     def list(self, request):
@@ -407,5 +411,6 @@ class StatementViewset(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
+        user = self.request.user
         account = self.request.query_params.get('account')
-        return filtering_by_account(Statement, account)
+        return filtering_by_account(Statement, account, user)
