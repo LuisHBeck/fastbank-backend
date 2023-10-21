@@ -305,6 +305,12 @@ class CardViewSet(viewsets.ModelViewSet):
         NormalUserGetPostPatch
     ]
 
+    def get_queryset(self):
+        user = self.request.user
+        account = self.request.query_params.get('account')
+        return filtering_by_account(Card, account, user)
+    
+
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return CreateCardSerializer
