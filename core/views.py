@@ -387,10 +387,10 @@ class PixViewSet(viewsets.GenericViewSet):
         payer_account = get_object_or_404(Account, pk=id_payer_acount)
         receiver_account = get_object_or_404(Account, pk=id_receiver_account)
 
-        if payer_account.balance >= amount:
-            payer_account.balance -= amount
+        if payer_account.balance >= Decimal(amount):
+            payer_account.balance -= Decimal(amount)
             payer_account.save()
-            receiver_account.balance += amount
+            receiver_account.balance += Decimal(amount)
             receiver_account.save()
 
             payer_statement = Statement.objects.create(
