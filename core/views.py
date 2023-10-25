@@ -153,7 +153,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             credit_limit=credit_limit
         )
         account.user.add(user)
-        return Response({'Successfully created': f'Agency: {agency}, Number: {number}, Credit Limit: R${credit_limit}'}, status=status.HTTP_201_CREATED)
+        return Response({'created': f'Agency: {agency}, Number: {number}, Credit Limit: R${credit_limit}'}, status=status.HTTP_201_CREATED)
     
 
 #INVESTMENT VIEW
