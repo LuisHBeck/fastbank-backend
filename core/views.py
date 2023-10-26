@@ -333,7 +333,7 @@ class CardViewSet(viewsets.ModelViewSet):
             verification_code=cv,
             is_active=True,
         )
-        return Response({'Successfully created': f'Number: {number}, Expiration: {expiration_date}, Verification Code: {cv}'}, status=status.HTTP_201_CREATED)
+        return Response({'created': f'Number: {number}, Expiration: {expiration_date}, Verification Code: {cv}'}, status=status.HTTP_201_CREATED)
     
     
 #TRANSACTION VIEW
