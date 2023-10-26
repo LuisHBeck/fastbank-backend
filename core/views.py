@@ -197,11 +197,11 @@ class LoanViewSet(viewsets.ModelViewSet):
     
     def create(self, request):
         request_date = datetime.now()
-        interest_rate = 15
+        interest_rate = 15.0
         is_approved = True
         approval_date = datetime.now()
-        amount_request = request.data.get('amount_request')
-        installment_amount = request.data.get('installment_amount')
+        amount_request = float(request.data.get('amount_request'))
+        installment_amount = int(request.data.get('installment_amount'))
         observation = request.data.get('observation')
         id_account = request.data.get('id_account')
         account = get_object_or_404(Account, pk=id_account)
@@ -238,7 +238,7 @@ class LoanViewSet(viewsets.ModelViewSet):
                 amount = amount_request,
                 balance = account.balance
             )  
-            return Response({'Request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}'}, status=status.HTTP_201_CREATED)
+            return Response({'request': f'Amount: {amount_request} Installments: {installment_amount}, Interest rate: {interest_rate}%, Final amount: {final_amount}, {installment_amount} x R${installment_amount_value}'}, status=status.HTTP_201_CREATED)
         
         loan = Loan.objects.create(
             id_account = account,
@@ -249,7 +249,7 @@ class LoanViewSet(viewsets.ModelViewSet):
             is_approved = False,
             observation = 'Not approved! Amount requested exceeds your credit limit by more than 3 times'
         )
-        return Response({'Request': 'Not approved! Amount requested exceeds your credit limit by more than 3 times'}, status=status.HTTP_201_CREATED)
+        return Response({'request': 'Not approved! Amount requested exceeds your credit limit by more than 3 times'}, status=status.HTTP_201_CREATED)
 
 
 #INSTALLMENT VIEW
