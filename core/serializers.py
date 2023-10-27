@@ -132,6 +132,7 @@ class InvestmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Investment
         fields = [
+            'id',
 			'type',
             'contribution',
             'admin_fee',

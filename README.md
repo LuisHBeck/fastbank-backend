@@ -216,6 +216,7 @@ The value for "type" needs to be "Savings" or "Current"
 ```` GET METHOD ````
 ```json
 {
+  "id": 1,
   "type": "LCA",
   "contribution": "135.25",
   "admin_fee": "1.50",
