@@ -1,7 +1,12 @@
-import requests, os, subprocess, multiprocessing
+import requests, os, subprocess, multiprocessing, dotenv
 from time import sleep
 
-BASE_URL = 'http://10.109.71.6:8056/api/v1/'
+dotenv.load_dotenv()
+
+IP = os.getenv('IP')
+PORT = os.getenv('PORT')
+VERSION = 'v1'
+BASE_URL = f'http://{IP}:{PORT}/api/{VERSION}/'
 
 user_create_url = os.path.join(BASE_URL, 'auth/users/')
 jwt_create_url = os.path.join(BASE_URL, 'auth/jwt/create/')
@@ -31,7 +36,7 @@ def data_base_creation():
 
 def run_server():
 	try:
-		subprocess.run(['py', 'manage.py', 'runserver', '10.109.71.6:8056'], check=True)
+		subprocess.run(['py', 'manage.py', 'runserver', f'{IP}:{PORT}'], check=True)
 	except subprocess.CalledProcessError as e:
 		print(e)
 	except Exception as e:
