@@ -179,6 +179,34 @@ class AccountInvestmentViewSet(viewsets.ModelViewSet):
         return filtering_by_account(AccountInvestments, account, user)
     
 
+    def create(self, request):
+        acc_number = request.data.get('id_account')
+        investment_id = request.data.get('id_investment')
+
+        account = get_object_or_404(Account, pk=acc_number)
+        investment = get_object_or_404(Investment, pk=investment_id)
+
+        if account.balance >= investment.contribution:
+            acc_investment = AccountInvestments.objects.create(
+                id_account = account,
+                id_investment = investment
+            )
+
+            account.balance -= investment.contribution
+            account.save()
+
+            statement = Statement.objects.create(
+                id_account = account,
+                transaction_type = '-*',
+                amount = investment.contribution,
+                balance = account.balance
+            )
+
+            return Response({'investment': f'Successfully invested R${investment.contribution}'}, status=status.HTTP_201_CREATED)
+        
+        return Response({'investment': f'Insufficient founds'}, status=status.HTTP_200_OK)
+    
+
 #LOAN VIEW
 class LoanViewSet(viewsets.ModelViewSet):
     permission_classes = [
