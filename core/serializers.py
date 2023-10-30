@@ -239,7 +239,8 @@ class StatementSerializer(serializers.ModelSerializer):
             'id_account',
             'transaction_type',
             'amount',
-            'balance'
+            'balance',
+            'created_at'
         ]
 
 

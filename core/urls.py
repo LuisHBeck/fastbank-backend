@@ -15,7 +15,7 @@ from .views import(
     CardViewSet,
     CardTransactionViewSet,
     PixViewSet,
-    StatementViewset
+    StatementViewSet
 )
 
 router = SimpleRouter()
@@ -32,7 +32,7 @@ router.register('installments', InstallmentViewSet, basename='installments')
 router.register('cards', CardViewSet, basename='loans')
 router.register('card-transactions', CardTransactionViewSet, basename='cards-transactions')
 router.register('pix', PixViewSet, basename='pix')
-router.register('statements', StatementViewset, basename='statements')
+router.register('statements', StatementViewSet, basename='statements')
 
 urlpatterns = [
 	path('investments/account/<int:account>/', AccountInvestmentViewSet.as_view({'get': 'list'}), name='account-investments')

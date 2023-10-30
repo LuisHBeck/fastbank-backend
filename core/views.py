@@ -410,7 +410,7 @@ class PixViewSet(viewsets.GenericViewSet):
         return Response({'Failed': 'Insufficient founds'}, status=status.HTTP_201_CREATED)
     
 
-class StatementViewset(viewsets.ModelViewSet):
+class StatementViewSet(viewsets.ModelViewSet):
     serializer_class = StatementSerializer
     permission_classes = [
         NormalUserGet
