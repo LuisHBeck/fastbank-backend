@@ -36,23 +36,3 @@ def filtering_by_account(model, account, user):
             queryset = queryset.filter(id_account=account)
             return queryset
     return []
-
-
-# def filtering_by_account(model, account, user):
-#     """
-#     Filtering the queryset by a specific account
-
-#     Args:
-#         model (class): Models class to filter
-
-#     Returns:
-#         queryset: filtered by the account
-#     """
-#     queryset = model.objects.all()
-#     if account:
-#         account_obj = Account.objects.get(number=account)
-#         if user in account_obj.user.all():
-#             queryset = queryset.filter(id_account=account)
-#             return queryset
-#         return []
-#     return []
