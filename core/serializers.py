@@ -2,21 +2,7 @@ from rest_framework import serializers
 
 from django.contrib.auth import get_user_model
 
-from .models import (
-	NaturalPerson,
-	LegalPerson,
-	Address,
-	Email,
-	Phone,
-    Account,
-	Investment,
-    AccountInvestments,
-	Loan,
-	Installment,
-	Card,
-	CardTransaction,
-    Statement
-)
+from .models import *
 
 class UserSerializer(serializers.ModelSerializer):
     

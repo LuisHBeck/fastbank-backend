@@ -6,52 +6,13 @@ import random
 from datetime import datetime, timedelta
 from decimal import Decimal
 
-from .models import (
-	NaturalPerson,
-	LegalPerson,
-	Address,
- 	Email,
-	Phone,
-    Account,
-    Investment,
-    AccountInvestments,
-    Loan,
-    Installment,
-    Card,
-    CardTransaction,
-    Statement
-)
+from .models import *
 
-from .serializers import (
-	NaturalPersonSerializer,
-	LegalPersonSerializer,
-	AddressSerializer,
- 	EmailSerializer,
-	PhoneSerializer,
-    AccountSerializer,
-    AccountPatchSerializer,
-    CreateAccountSerializer,
-    InvestmentSerializer,
-    AccountInvestmentSerializer,
-    LoanSerializer,
-    CreateLoanSerializer,
-    InstallmentSerializer,
-    CardSerializer,
-    CreateCardSerializer,
-    CardTransactionSerializer,
-    StatementSerializer
-)
+from .serializers import *
 
-from .permissions import (
-    IsSuperUser,
-    NormalUserGet,
-    NormalUserPost,
-    NormalUserGetPost,
-    NormalUserPostPatch,
-    NormalUserGetPostPatch
-)
+from .permissions import *
 
-from .utils.filters import filtering_by_user, filtering_by_account
+from .utils.filters import *
 
 #NATURAL PERSON VIEW 
 class NaturalPersonViewSet(viewsets.ModelViewSet):

@@ -1,22 +1,7 @@
 from django.urls import path
 from rest_framework.routers import SimpleRouter
 
-from .views import(
-    NaturalPersonViewSet,
-    LegalPersonViewSet,
-    AddressViewSet,
-    EmailViewSet,
-    PhoneViewSet,
-    AccountViewSet,
-    InvestmentViewSet,
-    AccountInvestmentViewSet,
-    LoanViewSet,
-    InstallmentViewSet,
-    CardViewSet,
-    CardTransactionViewSet,
-    PixViewSet,
-    StatementViewSet
-)
+from .views import *
 
 router = SimpleRouter()
 router.register('natural-people', NaturalPersonViewSet, basename='natural-people')

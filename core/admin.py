@@ -1,20 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-	NaturalPerson,
-	LegalPerson,
-	Address,
-	Email,
-	Phone,
-	Account,
-	Investment,
-	AccountInvestments,
-	Loan,
-	Installment,
-	Card,
-	CardTransaction,
-	Statement
-)
+from .models import *
 
 @admin.register(NaturalPerson)
 class NaturalPersonAdmin(admin.ModelAdmin):
