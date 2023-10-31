@@ -211,21 +211,21 @@ def main():
 	super_user_header = create_headers(123,'123')
 
 	# NATURAL PERSON REGISTRASTION
-	print(user_create(123456, "test@test", 'media\\alemao.jpg'))
+	print(user_create(123456, "test@test", 'users\\photo\\alemao.jpg'))
 	headers_1 = create_headers(123456, "test@test")
 	print(headers_1)
 	print(create_natural_person(headers_1, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))
  
-	print(user_create(1234567, "test@test", 'media\\alemao.jpg'))
+	print(user_create(1234567, "test@test", 'users\\photo\\alemao.jpg'))
 	headers_2 = create_headers(1234567, "test@test")
 	print(create_natural_person(headers_2, 1234567, 'Luís', '2004-06-19', '222222', 'Beck'))
 
 	# LEGAL PERSON REGISTRASTION
-	print(user_create(654321, "test@test", 'media\\alemao.jpg'))
+	print(user_create(654321, "test@test", 'users\\photo\\alemao.jpg'))
 	headers_3 = create_headers(654321, "test@test")
 	print(create_legal_person(headers_3, 654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
  
-	print(user_create(7654321, "test@test", 'media\\alemao.jpg'))
+	print(user_create(7654321, "test@test", 'users\\photo\\alemao.jpg'))
 	headers_4 = create_headers(7654321, "test@test")
 	print(create_legal_person(headers_4, 7654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
  
