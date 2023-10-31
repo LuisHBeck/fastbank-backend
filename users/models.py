@@ -1,4 +1,5 @@
 from django.db import models
+from .utils.image_processing import *
 
 from django.contrib.auth.models import(
     AbstractUser, 
@@ -35,10 +36,10 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
 	"""
-		Custumized User model
+		Customized User model
 	"""
 	register_number = models.IntegerField(unique=True, primary_key=True)
-	picture = models.CharField(max_length=255)
+	picture = models.ImageField(upload_to=upload_user_photo, blank=True, null=True)
 	is_staff = models.BooleanField(default=True)
 
 	USERNAME_FIELD = 'register_number'

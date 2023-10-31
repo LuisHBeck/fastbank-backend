@@ -1,4 +1,4 @@
-import requests, os, subprocess, multiprocessing, dotenv
+import requests, os, subprocess, multiprocessing, dotenv, base64
 from time import sleep
 
 dotenv.load_dotenv()
@@ -52,12 +52,14 @@ def superuser_creation():
 		print(e)		
 
 
-def user_create(register_number, password, picture='a'):
+def user_create(register_number, password):
+	with open('image.jpg', 'rb') as image_file:
+		image_data = base64.b64encode(image_file.read()).decode('utf-8')
 	response = requests.post(user_create_url, 
 		json={
 			"register_number": register_number,
-			"picture": picture,
 			"password": password,
+			"picture": image_data
 		})
 	return response.json()
 
