@@ -6,4 +6,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         User = get_user_model()
-        User.objects.create_superuser(123, '123')
+        User.objects.create_superuser(11111111111, '123')
