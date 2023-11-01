@@ -27,7 +27,7 @@
   .venv\Scripts\activate
   pip install -r requirements.txt
   ```
-  Setup the environment variables according to .env.examples
+  Setup the environment variables according to .env.example
   ```ps
   IP = ''
   PORT = ''
