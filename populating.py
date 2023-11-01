@@ -63,6 +63,7 @@ def user_create(register_number, password, picture):
 				"password": password
 			},
 			files=files)
+	print(response.json())
 	return response.json()
 
 
@@ -87,6 +88,7 @@ def create_natural_person(headers, register_number, name, birth_date, rg, social
 			'rg': rg,
 			'social_name': social_name
 		})
+	print(response.json())
 	return response.json()
 
 
@@ -101,6 +103,7 @@ def create_legal_person(headers, register_number, fantasy_name, establishment_da
 			'state_registration': state_registration,
 			'legal_nature': legal_nature
 		})
+	print(response.json())
 	return response.json()
 
 
@@ -114,6 +117,7 @@ def create_address(headers, user, street, number, neighborhood, city, state, cep
         'state': state,
         'cep': cep
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -122,6 +126,7 @@ def create_email(headers, user, email):
         'user': user,
         'email': email
     })
+    print(response.json())
     return response.json()
 
 
@@ -132,6 +137,7 @@ def create_phone(headers, user, area_code, prefix_number, phone_number):
         'prefix_number': prefix_number,
         'phone_number': phone_number
     })
+    print(response.json())
     return response.json()
 
 
@@ -139,6 +145,7 @@ def create_account(headers, type):
     response = requests.post(account_url, headers=headers, json={
         'type': type
     })
+    print(response.json())
     return response.json()
 
 
@@ -152,6 +159,7 @@ def create_investment(headers, type, contribution, admin_fee, period, risc_rate,
 		'profitability': profitability,
 		'is_active': is_active
 	})
+	print(response.json()) 
 	return response.json()
 
 
@@ -160,6 +168,7 @@ def create_account_investment(headers, id_account, id_investment):
 		'id_account':id_account,
 		'id_investment':id_investment
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -170,6 +179,7 @@ def create_loan(headers, id_account, amount, installment_amount, observation):
 		'installment_amount': installment_amount,
 		'observation': observation
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -177,6 +187,7 @@ def create_card(headers, id_account):
 	response = requests.post(card_new_url, headers=headers, json={
 		'id_account': id_account
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -187,6 +198,7 @@ def create_card_transaction(headers, id_account, id_card, operation, amount):
 		'operation': operation,
 		'amount': amount
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -196,6 +208,7 @@ def create_pix(headers, payer_account, receiver_account, amount):
 		'id_receiver_account': receiver_account,
 		'amount': amount
 	})
+	print(response.json())
 	return response.json()
 
 
@@ -206,62 +219,51 @@ def main():
 	server_process.start()
 	sleep(1)
 
-	# SUPER USER HEADER
 	superuser_creation()
 	super_user_header = create_headers(11111111111,'123')
 
-	# NATURAL PERSON REGISTRASTION
-	print(user_create(45505681000, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_1 = create_headers(45505681000, "test@test")
-	print(headers_1)
-	print(create_natural_person(headers_1, 45505681000, 'Luís', '2004-06-19', '394541716', 'Beck'))
+	user1 = user_create(45505681000, "test@test", 'users\\photo\\alemao.jpg')
+	headers_1 = create_headers(user1['register_number'], "test@test")
+	natural1 = create_natural_person(headers_1, user1['register_number'], 'Luís', '2004-06-19', '394541716', 'Beck')
  
-	print(user_create(28142572001, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_2 = create_headers(28142572001, "test@test")
-	print(create_natural_person(headers_2, 28142572001, 'Luís', '2004-06-19', '378889205', 'Beck'))
+	user2 = user_create(28142572001, "test@test", 'users\\photo\\alemao.jpg')
+	headers_2 = create_headers(user2['register_number'], "test@test")
+	natural2 = create_natural_person(headers_2, user2['register_number'], 'Luís', '2004-06-19', '378889205', 'Beck')
 
-	# LEGAL PERSON REGISTRASTION
-	print(user_create(52205116000160, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_3 = create_headers(52205116000160, "test@test")
-	print(create_legal_person(headers_3, 52205116000160, 'Fantasy', '2023-06-19', '86420975183', '159716446', 'Cars'))
+	user3 = user_create(52205116000160, "test@test", 'users\\photo\\alemao.jpg')
+	headers_3 = create_headers(user3['register_number'], "test@test")
+	legal1 = create_legal_person(headers_3, user3['register_number'], 'Fantasy', '2023-06-19', '86420975183', '159716446', 'Cars')
  
-	print(user_create(67040725000184, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_4 = create_headers(67040725000184, "test@test")
-	print(create_legal_person(headers_4, 67040725000184, 'Fantasy', '2023-06-19', '93721845601', '050175645', 'Cars'))
+	user4 = user_create(67040725000184, "test@test", 'users\\photo\\alemao.jpg')
+	headers_4 = create_headers(user4['register_number'], "test@test")
+	legal2 = create_legal_person(headers_4, user4['register_number'], 'Fantasy', '2023-06-19', '93721845601', '050175645', 'Cars')
  
-	# ADDRESS REGISTRASTION
-	print(create_address(headers_1, 45505681000, 'Rua Jones', '69', 'LeWhite Green', 'Varsóvia', 'Polônia', '132760190'))
+	address1 = create_address(headers_1, user1['register_number'], 'Rua Jones', '69', 'LeWhite Green', 'Varsóvia', 'Polônia', '132760190')
  
-	# EMAIL REGISTRASTION
-	print(create_email(headers_1, 45505681000, 'test@gmail.com'))
+	email1 = create_email(headers_1, user1['register_number'], 'test@gmail.com')
  
-	# PHONE REGISTRASTION
-	print(create_phone(headers_1, 45505681000, '+55', '19', '267777141'))
+	phone1 = create_phone(headers_1, 45505681000, '+55', '19', '267777141')
  
-	# ACCOUNT REGISTRASTION
-	print(create_account(headers_1, 'Savings'))
-	print(create_account(headers_3, 'Current'))	
+	account1 = create_account(headers_1, 'Savings')
+	account2 = create_account(headers_3, 'Current')	
 
-	# INVESTMENT REGISTRATION
-	print(create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6))
-	print(create_investment(super_user_header, 'BCT', 192.25, 3.5, '2030-12-11', 5.2, 29.6))
+	invest1 = create_investment(super_user_header, 'LCA', 135.25, 1.5, '2030-12-11', 2.3, 15.6)
+	invest2 = create_investment(super_user_header, 'BCT', 192.25, 3.5, '2030-12-11', 5.2, 29.6)
 
-	print(create_account_investment(headers_1, 1111,1))
-	print(create_account_investment(headers_1, 1111,2))
-	print(create_account_investment(headers_1, 1112,1))
-	print(create_account_investment(headers_1, 1112,2))
+	acc_invest1 = create_account_investment(headers_1, 1111, invest1['id'])
+	acc_invest2 =create_account_investment(headers_1, 1111, invest2['id'])
+	acc_invest3 =create_account_investment(headers_1, 1112, invest1['id'])
+	acc_invest4 =create_account_investment(headers_1, 1112, invest2['id'])
 
-	print(create_loan(headers_1, 1111, 1459.25, 4, "personal use"))
-	print(create_loan(headers_1, 1111, 1325, 3, "personal use"))
-	print(create_loan(headers_2, 1112, 150.25, 2, "personal use"))
+	loan1 = create_loan(headers_1, 1111, 1459.25, 4, "personal use")
+	loan1 = create_loan(headers_1, 1111, 1325, 3, "personal use")
+	loan1 = create_loan(headers_2, 1112, 150.25, 2, "personal use")
 
-	print(create_card(headers_1, 1111))
+	card1 = create_card(headers_1, 1111)
 
-	print(create_card_transaction(headers_1, 1111, 1, "Debit", 500))
+	card_t1 = create_card_transaction(headers_1, 1111, 1, "Debit", 500)
 
-	print(create_pix(headers_1, 1111,1112,125))
-
-	# server_process.join()
+	pix1 = create_pix(headers_1, 1111,1112,125)
 
 if __name__ == '__main__':
 	main()
