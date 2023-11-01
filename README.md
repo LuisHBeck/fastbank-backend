@@ -29,7 +29,7 @@
   ```
   Run the server and populate
   ```ps
-  py populating.py
+  py client.py
   ```
   This command does everything you need to prepare the django environment: 
     - makemigrations
