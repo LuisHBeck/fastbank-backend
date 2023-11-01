@@ -31,6 +31,7 @@ msgpack==1.0.7
 oauthlib==3.2.2
 packaging==23.2
 pexpect==4.8.0
+Pillow==10.1.0
 pkginfo==1.9.6
 platformdirs==3.11.0
 poetry==1.6.1
