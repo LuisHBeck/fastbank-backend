@@ -377,3 +377,22 @@ For GET Method need to pass the query parameter "?account=<account_number>"
   "id_receiver_account": <account_fk>
   "amount": <float> 
 }
+```
+### STATEMENT
+``` authorization=True ```
+```ps
+/api/v1/statements/
+```
+
+```` GET METHOD ```` 
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id_account": <int>,
+  "transaction_type": "<str>",
+  "amount": <float>,
+  "balance": <float>,
+  "created_at" <yyyy-mm-dd>
+}
+```
