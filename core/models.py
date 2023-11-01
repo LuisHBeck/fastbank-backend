@@ -40,6 +40,15 @@ class LegalPerson(models.Model):
 	state_registration = models.CharField(max_length=9)
 	legal_nature = models.CharField(max_length=100)
 
+	def save(self, *args, **kwargs):
+		if self.cnpj:
+			NumberFieldValidator(14, 'CNPJ')(self.cnpj)
+		if self.municipal_registration:
+			NumberFieldValidator(11, 'Municipal Registrations')(self.municipal_registration)
+		if self.state_registration:
+			NumberFieldValidator(9, 'State Registration')(self.state_registration)
+		super().save(*args, **kwargs)
+
 	class Meta:
 		verbose_name = 'legal people'
 		verbose_name_plural = 'legal people'
@@ -69,9 +78,13 @@ class Address(Base):
 	neighborhood = models.CharField(max_length=50)
 	city = models.CharField(max_length=50)
 	state = models.CharField(max_length=50)
-	cep = models.CharField(max_length=12)
+	cep = models.CharField(max_length=9)
+
+	def save(self, *args, **kwargs):
+		if self.cep:
+			NumberFieldValidator(9, 'CEP')(self.cep)
+		super().save(*args, **kwargs)
 	
-  
 	class Meta:
 		verbose_name = 'address'
 		verbose_name_plural = 'addresses'
@@ -85,7 +98,7 @@ class Email(Base):
       Email model
     """
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='user_email')
-    email = models.CharField(max_length=100, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
     
     class Meta:
         verbose_name = 'email'
@@ -103,6 +116,15 @@ class Phone(Base):
     area_code = models.CharField(max_length=3)
     prefix_number = models.CharField(max_length=3)
     phone_number = models.CharField(max_length=10)
+    
+    def save(self, *args, **kwargs):
+        if self.area_code:
+            NumberFieldValidator(3, 'Area Code')(self.area_code)
+        if self.prefix_number:
+            NumberFieldValidator(2, 'Prefix Number')(self.prefix_number)
+        if self.phone_number:
+            NumberFieldValidator(9, 'Phone Number')(self.phone_number)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'phone'
@@ -110,6 +132,7 @@ class Phone(Base):
         
     def __str__(self):
         return f'{self.prefix_number} {self.area_code} {self.phone_number}'
+
 		
 
 class Account(Base):

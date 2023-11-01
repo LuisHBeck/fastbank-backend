@@ -212,31 +212,31 @@ def main():
 
 	# NATURAL PERSON REGISTRASTION
 	print(user_create(45505681000, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_1 = create_headers(123456, "test@test")
+	headers_1 = create_headers(45505681000, "test@test")
 	print(headers_1)
-	print(create_natural_person(headers_1, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))
+	print(create_natural_person(headers_1, 45505681000, 'Luís', '2004-06-19', '394541716', 'Beck'))
  
-	print(user_create(1234567, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_2 = create_headers(1234567, "test@test")
-	print(create_natural_person(headers_2, 1234567, 'Luís', '2004-06-19', '222222', 'Beck'))
+	print(user_create(28142572001, "test@test", 'users\\photo\\alemao.jpg'))
+	headers_2 = create_headers(28142572001, "test@test")
+	print(create_natural_person(headers_2, 28142572001, 'Luís', '2004-06-19', '378889205', 'Beck'))
 
 	# LEGAL PERSON REGISTRASTION
-	print(user_create(654321, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_3 = create_headers(654321, "test@test")
-	print(create_legal_person(headers_3, 654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
+	print(user_create(52205116000160, "test@test", 'users\\photo\\alemao.jpg'))
+	headers_3 = create_headers(52205116000160, "test@test")
+	print(create_legal_person(headers_3, 52205116000160, 'Fantasy', '2023-06-19', '86420975183', '159716446', 'Cars'))
  
-	print(user_create(7654321, "test@test", 'users\\photo\\alemao.jpg'))
-	headers_4 = create_headers(7654321, "test@test")
-	print(create_legal_person(headers_4, 7654321, 'Fantasy', '2023-06-19', '1234', '4321', 'Cars'))
+	print(user_create(67040725000184, "test@test", 'users\\photo\\alemao.jpg'))
+	headers_4 = create_headers(67040725000184, "test@test")
+	print(create_legal_person(headers_4, 67040725000184, 'Fantasy', '2023-06-19', '93721845601', '050175645', 'Cars'))
  
 	# ADDRESS REGISTRASTION
-	print(create_address(headers_1, 123456, 'Rua Jones', '69', 'LeWhite Green', 'Varsóvia', 'Polônia', '12564789'))
+	print(create_address(headers_1, 45505681000, 'Rua Jones', '69', 'LeWhite Green', 'Varsóvia', 'Polônia', '132760190'))
  
 	# EMAIL REGISTRASTION
-	print(create_email(headers_1, 123456, 'test@gmail.com'))
+	print(create_email(headers_1, 45505681000, 'test@gmail.com'))
  
 	# PHONE REGISTRASTION
-	print(create_phone(headers_1, 123456, '+55', '11', '1111-1111'))
+	print(create_phone(headers_1, 45505681000, '+55', '19', '267777141'))
  
 	# ACCOUNT REGISTRASTION
 	print(create_account(headers_1, 'Savings'))
