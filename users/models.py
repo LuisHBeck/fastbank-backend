@@ -1,5 +1,7 @@
 from django.db import models
 from .utils.image_processing import *
+from django.core.validators import MinValueValidator, MaxValueValidator
+from .utils.validators import IntegerFieldValidator
 
 from django.contrib.auth.models import(
     AbstractUser, 
@@ -44,8 +46,12 @@ class CustomUser(AbstractUser):
 
 	USERNAME_FIELD = 'register_number'
 	REQUIRED_FIELDS = ['picture']
-	
 
+	def save(self, *args, **kwargs):
+		if self.register_number:
+			IntegerFieldValidator(11, 14, 'CPF')(self.register_number)
+		super().save(*args, **kwargs)
+	
 	def __str__(self) -> str:
 		return str(self.register_number)
 	
