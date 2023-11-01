@@ -208,10 +208,10 @@ def main():
 
 	# SUPER USER HEADER
 	superuser_creation()
-	super_user_header = create_headers(123,'123')
+	super_user_header = create_headers(11111111111,'123')
 
 	# NATURAL PERSON REGISTRASTION
-	print(user_create(123456, "test@test", 'users\\photo\\alemao.jpg'))
+	print(user_create(45505681000, "test@test", 'users\\photo\\alemao.jpg'))
 	headers_1 = create_headers(123456, "test@test")
 	print(headers_1)
 	print(create_natural_person(headers_1, 123456, 'Luís', '2004-06-19', '222222', 'Beck'))

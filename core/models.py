@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from .utils.validators import NumberFieldValidator
 
 class NaturalPerson(models.Model):
 	"""
@@ -11,6 +12,13 @@ class NaturalPerson(models.Model):
 	cpf = models.CharField(max_length=11)
 	rg = models.CharField(max_length=9)
 	social_name = models.CharField(max_length=50)
+
+	def save(self, *args, **kwargs):
+		if self.cpf:
+			NumberFieldValidator(11, 'CPF')(self.cpf)
+		if self.rg:
+			NumberFieldValidator(9, 'RG')(self.rg)
+		super().save(*args, **kwargs)
 
 	class Meta:
 		verbose_name = 'natural people'
