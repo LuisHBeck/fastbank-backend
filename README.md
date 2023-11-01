@@ -27,6 +27,16 @@
   .venv\Scripts\activate
   pip install -r requirements.txt
   ```
+  Setup the environment variables according to .env.examples
+  ```ps
+  IP = ''
+  PORT = ''
+  SECRET_KEY = '' 
+  ```
+  Run the command below to generate de Django Secret Key
+  ```ps
+  python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+  ```
   Run the server and populate
   ```ps
   py client.py
