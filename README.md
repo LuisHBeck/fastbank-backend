@@ -345,7 +345,7 @@ For GET Method need to pass the query parameter "?account=<account_number>"
   "id_account": <account_fk>,
   "amount_request": <float>,
   "installment_amount": <int>,
-  "observation": <str>
+  "observation": "<str>"
 }
 ```
 
