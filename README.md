@@ -329,7 +329,6 @@ For GET Method need to pass the query parameter "?account=<account_number>"
 {
   "id_account": <account_fk>,
   "id_card": <card_fk>,
-  "operation": <str>,
   "amount": <float>
 }
 ```
