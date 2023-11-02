@@ -27,6 +27,16 @@
   .venv\Scripts\activate
   pip install -r requirements.txt
   ```
+  Setup the environment variables according to .env.example
+  ```ps
+  IP = ''
+  PORT = ''
+  SECRET_KEY = '' 
+  ```
+  Run the command below to generate de Django Secret Key
+  ```ps
+  python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+  ```
   Run the server and populate
   ```ps
   py client.py
@@ -367,3 +377,22 @@ For GET Method need to pass the query parameter "?account=<account_number>"
   "id_receiver_account": <account_fk>
   "amount": <float> 
 }
+```
+### STATEMENT
+``` authorization=True ```
+```ps
+/api/v1/statements/
+```
+
+```` GET METHOD ```` 
+
+For GET Method need to pass the query parameter "?account=<account_number>"
+```json
+{
+  "id_account": <int>,
+  "transaction_type": "<str>",
+  "amount": <float>,
+  "balance": <float>,
+  "created_at" <yyyy-mm-dd>
+}
+```
