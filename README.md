@@ -49,7 +49,7 @@
     - database population
 
 ## ENDPOINTS 🏁
-  If endpoint has ```authorization=True``` use {"Authorization": "Bearer <jwt_access>"}
+  If endpoint has ```authorization=True``` use {"Authorization": "Bearer <jwt.access>"}
 ### USERS
   ``` authorization=False ```
   ```ps
