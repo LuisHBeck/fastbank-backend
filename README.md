@@ -240,7 +240,7 @@ The value for "type" needs to be "Savings" or "Current"
 ### ACCOUNTS INVESTMENTS
 ``` authorization=True ```
 ```ps
-/api/v1/investments/account/new/
+/api/v1/account-investments/
 ```
 ```` POST METHOD ````
 
