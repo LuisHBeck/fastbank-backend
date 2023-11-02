@@ -299,7 +299,7 @@ For GET Method need to pass the query parameter "?account=<account_number>&final
 
 ```json
 {
-  "id_account": <account_fk>,
+  "id_account": <account_fk>
 }
 ```
 
