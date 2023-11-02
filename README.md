@@ -373,7 +373,7 @@ For GET Method need to pass the query parameter "?account=<account_number>"
 ```json
 {
   "id_account": <account_fk>,
-  "id_receiver_account": <account_fk>
+  "id_receiver_account": <account_fk>,
   "amount": <float> 
 }
 ```
