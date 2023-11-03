@@ -31,7 +31,19 @@
   ```ps
   IP = ''
   PORT = ''
-  SECRET_KEY = '' 
+
+  SECRET_KEY = ''
+
+  DEBUG = ''
+
+  ALLOWED_HOSTS = ''
+
+  DB_ENGINE = ''
+  POSTGRES_DB = ''
+  POSTGRES_USER = ''
+  POSTGRES_PASSWORD = ''
+  POSTGRES_HOST = ''
+  POSTGRES_PORT = ''
   ```
   Run the command below to generate de Django Secret Key
   ```ps
