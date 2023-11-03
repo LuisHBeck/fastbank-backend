@@ -6,7 +6,7 @@ dotenv.load_dotenv()
 IP = os.getenv('IP')
 PORT = os.getenv('PORT')
 VERSION = 'v1'
-BASE_URL = f'http://{IP}:{PORT}/api/{VERSION}/'
+BASE_URL = f'http://localhost:{PORT}/api/{VERSION}/'
 
 user_create_url = os.path.join(BASE_URL, 'auth/users/')
 jwt_create_url = os.path.join(BASE_URL, 'auth/jwt/create/')
@@ -214,15 +214,15 @@ def create_pix(headers, payer_account, receiver_account, amount):
 
 def main():
 	#CREATING DATABSE
-	data_base_creation()
-	server_process = multiprocessing.Process(target=run_server)
-	server_process.start()
-	sleep(1)
+	# data_base_creation()
+	# server_process = multiprocessing.Process(target=run_server)
+	# server_process.start()
+	# sleep(1)
 
-	superuser_creation()
+	# superuser_creation()
 	super_user_header = create_headers(11111111111,'123')
 
-	user1 = user_create(45505681000, "test@test", 'users\\photo\\alemao.jpg')
+	user1 = user_create(register_number="45505681000", password="test@test", picture='users\\photo\\alemao.jpg')
 	headers_1 = create_headers(user1['register_number'], "test@test")
 	natural1 = create_natural_person(headers_1, user1['register_number'], 'Luís', '2004-06-19', '394541716', 'Beck')
  
