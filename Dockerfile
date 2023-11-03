@@ -30,6 +30,6 @@ RUN chmod +x /code/manage.py
 
 ENV PATH="/scripts:/venv/bin:$PATH"
 
-USER dkuser
+# USER dkuser
 
 CMD ["commands.sh"]
