@@ -40,7 +40,7 @@ class CustomUser(AbstractUser):
 	"""
 		Customized User model
 	"""
-	register_number = models.IntegerField(unique=True, primary_key=True)
+	register_number = models.BigIntegerField(primary_key=True, unique=True)
 	picture = models.ImageField(upload_to=upload_user_photo, blank=True, null=True)
 	is_staff = models.BooleanField(default=True)
 
