@@ -19,12 +19,14 @@ RUN python -m venv /venv && \
   adduser --disabled-password --no-create-home dkuser && \
   mkdir -p /data/web/static && \
   mkdir -p /data/web/media && \
-  chown -R duser:duser /venv && \
-  chown -R duser:duser /data/web/static && \
-  chown -R duser:duser /data/web/media && \
+  chown -R dkuser:dkuser /venv && \
+  chown -R dkuser:dkuser /data/web/static && \
+  chown -R dkuser:dkuser /data/web/media && \
   chmod -R 755 /data/web/static && \
   chmod -R 755 /data/web/media && \
   chmod -R +x /scripts
+
+RUN chmod +x /code/manage.py
 
 ENV PATH="/scripts:/venv/bin:$PATH"
 
