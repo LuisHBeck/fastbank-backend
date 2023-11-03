@@ -9,14 +9,14 @@ services:
     ports:
       - 8056:8000
     volumes:
-      - ./:code
+      - ./code:/code
     env_file:
       - ./.env
     networks:
       - compose-bridge
 
   postgredb:
-    container_name: database
+    container_name: postgredb
     image: postgres:13-alpine
     volumes: 
       - ./data/postgres/data:/var/lib/postgresql/data/
