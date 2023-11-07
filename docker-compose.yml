@@ -6,6 +6,11 @@ services:
     container_name: fastbank-api
     build: 
       context: .
+    command: >
+      sh -c "python manage.py makemigrations &&
+            python manage.py migrate &&
+            python manage.py create_superuser &&
+            python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8056:8000
     volumes:
