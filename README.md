@@ -18,15 +18,10 @@
     - Django REST Framework
     - Djoser
     - Jazzmin
+  * Docker 🐳
   * Insomnia
 
 ## Executing the project
-  Setup the virtual environment
-  ```ps
-  py -m venv .venv
-  .venv\Scripts\activate
-  pip install -r requirements.txt
-  ```
   Setup the environment variables according to .env.example
   ```ps
   IP = ''
@@ -48,6 +43,17 @@
   Run the command below to generate de Django Secret Key
   ```ps
   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+  ```
+  With Docker conatiners 🐳
+  ```ps
+  docker-compose build
+  docker-compose up
+  ```
+  or with virtual environment
+  ```ps
+  py -m venv .venv
+  .venv\Scripts\activate
+  pip install -r requirements.txt
   ```
   Run the server and populate
   ```ps
